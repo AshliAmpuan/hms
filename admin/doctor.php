@@ -1,157 +1,97 @@
+<?php include('../include/admin_session.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <?php include('../include/title.php'); ?>
-    <meta
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-      name="viewport"
-    />
-    <link
-      rel="icon"
-      href="../assets/img/kaiadmin/favicon.ico"
-      type="image/x-icon"
-    />
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <?php include('../include/title.php'); ?>
 
-    <!-- Fonts and icons -->
-    <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
-    <script>
-      WebFont.load({
-        google: { families: ["Public Sans:300,400,500,600,700"] },
-        custom: {
-          families: [
-            "Font Awesome 5 Solid",
-            "Font Awesome 5 Regular",
-            "Font Awesome 5 Brands",
-            "simple-line-icons",
-          ],
-          urls: ["../assets/css/fonts.min.css"],
-        },
-        active: function () {
-          sessionStorage.fonts = true;
-        },
-      });
-    </script>
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
 
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/css/plugins.min.css" />
-    <link rel="stylesheet" href="../assets/css/kaiadmin.min.css" />
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="../assets/modules/datatables/datatables.min.css">
+  <link rel="stylesheet" href="../assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
 
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="../assets/css/demo.css" />
-  </head>
-  <body>
-    <div class="wrapper">
-      <!-- Sidebar -->
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+</script>
+<!-- /END GA --></head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <?php include('../include/header.php'); ?>
       <?php include('../include/sidebar.php'); ?>
-      <!-- End Sidebar -->
 
-      <div class="main-panel">
-        <div class="main-header">
-          <div class="main-header-logo">
-            <!-- Logo Header -->
-            <div class="logo-header" data-background-color="dark">
-              <a href="../index.html" class="logo">
-                <img
-                  src="../assets/img/kaiadmin/logo_light.svg"
-                  alt="navbar brand"
-                  class="navbar-brand"
-                  height="20"
-                />
-              </a>
-              <div class="nav-toggle">
-                <button class="btn btn-toggle toggle-sidebar">
-                  <i class="gg-menu-right"></i>
-                </button>
-                <button class="btn btn-toggle sidenav-toggler">
-                  <i class="gg-menu-left"></i>
-                </button>
-              </div>
-              <button class="topbar-toggler more">
-                <i class="gg-more-vertical-alt"></i>
-              </button>
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <h1></h1>
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active"><a href="#">Entry</a></div>
+              <div class="breadcrumb-item">Doctor Management</div>
             </div>
-            <!-- End Logo Header -->
           </div>
-          <!-- Navbar Header -->
-          <?php include('../include/header.php'); ?>
-          <!-- End Navbar -->
-        </div>
 
-        <div class="container">
-          <div class="page-inner">
-            <div class="page-header">
-              <h3 class="fw-bold mb-3">Doctor</h3>
-              <ul class="breadcrumbs mb-3">
-                <li class="nav-home">
-                  <a href="#">
-                    <i class="icon-home"></i>
-                  </a>
-                </li>
-                <li class="separator">
-                  <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                  <a href="#">Users</a>
-                </li>
-                <li class="separator">
-                  <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                  <a href="#">Doctor Management</a>
-                </li>
-              </ul>
-            </div>
+          <div class="section-body">
+            <h2 class="section-title">Doctor Management</h2>
+            <!-- <p class="section-lead">
+              We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
+            </p> -->
             <div class="row">
-            <div class="col-md-12">
+              <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    
-                    <div class="d-flex align-items-center">
-                    <h4 class="card-title">Doctor Management</h4>
-                        <button
-                            class="btn btn-primary btn-round ms-auto"
-                            data-bs-toggle="modal"
-                            data-bs-target="#addRowModal"
-                        >
-                        <i class="fa fa-plus"></i>
-                        Add Doctor
-                      </button>
+                    <h4>Doctor Table</h4>
+                    <div class="card-header-action">
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Doctor</button>
                     </div>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table
-                        id="multi-filter-select"
-                        class="display table table-striped table-hover"
-                      >
+                      <table class="table table-striped" id="table-1">
                         <thead>
                           <tr>
-                            <th>Username</th>
+                          <th>
+                              #
+                            </th>
                             <th>Fullname</th>
-                            <th>Email</th>
-                            <th>Specialization</th>
                             <th>Contact Number</th>
                             <th>Address</th>
-                            <th>Role</th>
                             <th>Status</th>
                           </tr>
                         </thead>
-                        <tfoot>
-                          <tr>
-                            <th>Username</th>
-                            <th>Fullname</th>
-                            <th>Email</th>
-                            <th>Specialization</th>
-                            <th>Contact Number</th>
-                            <th>Address</th>
-                            <th>Role</th>
-                            <th>Status</th>
-                          </tr>
-                        </tfoot>
                         <tbody>
-                          
+                          <?php
+                            $query = mysqli_query($con, "SELECT *,
+                            (SELECT CASE WHEN active = 1 THEN 'active' ELSE 'Not Active' END) as status
+                             FROM doctor");
+                             $count = 0;
+                            while($row = mysqli_fetch_array($query)){
+                              $count += 1;
+                          ?>
+                          <tr>
+                            <td><?php echo $count; ?></td>
+                            <td><?php echo $row['fullname']; ?></td>
+                            <td><?php echo $row['contact_number']; ?></td>
+                            <td><?php echo $row['address']; ?></td>
+                            <td><?php echo $row['status']; ?></td>
+                          </tr>
+                          <?php } ?>
                         </tbody>
                       </table>
                     </div>
@@ -160,84 +100,136 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <?php include('../include/footer.php'); ?>
+        </section>
       </div>
-
-      <!-- Custom template | don't include it in your project! -->
-      
-      <!-- End Custom template -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Add Doctor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form method="POST">
+                  <div class="row">
+                      <!-- <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>Username</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-user"></i>
+                              </div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" name="username">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>Password</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-lock"></i>
+                              </div>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Password" name="password">
+                          </div>
+                        </div>
+                      </div> -->
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>Fullname</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-user"></i>
+                              </div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Fullname" name="fullname">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>Contact Number</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-phone"></i>
+                              </div>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Contact Number" name="contact_number">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <label>Address</label>
+                          <div class="input-group">
+                            <textarea name="address" class="form-control" id="" row="6"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  
+              </div>
+              <div class="modal-footer bg-whitesmoke br">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" name="submit" class="btn btn-primary">Save changes</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+     <?php include('../include/footer.php'); ?>
     </div>
-    <!--   Core JS Files   -->
-    <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
+  </div>
+  <?php
 
-    <!-- jQuery Scrollbar -->
-    <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-    <!-- Datatables -->
-    <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
-    <!-- Kaiadmin JS -->
-    <script src="../assets/js/kaiadmin.min.js"></script>
-    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <script src="../assets/js/setting-demo2.js"></script>
-    <script>
-      $(document).ready(function () {
-        $("#basic-datatables").DataTable({});
+      if(isset($_POST['submit']))
+      {
+          $fullname = $_POST['fullname'];
+          $contact_number = $_POST['contact_number'];
+          $address = $_POST['address'];
 
-        $("#multi-filter-select").DataTable({
-          pageLength: 5,
-          initComplete: function () {
-            this.api()
-              .columns()
-              .every(function () {
-                var column = this;
-                var select = $(
-                  '<select class="form-select"><option value=""></option></select>'
-                )
-                  .appendTo($(column.footer()).empty())
-                  .on("change", function () {
-                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+          $doctor = mysqli_query($con, "INSERT INTO doctor (`fullname`, `address`, `contact_number`) VALUES ('$fullname', '$address', '$contact_number')");
+                if($doctor)
+                {
+                    echo "<script>alert('Doctor Add Successfully!')</script>";
+                    echo "<script>location.replace('cashier.php')</script>";
+                }
+                else
+                {
+                  echo "<script>alert('Something Went Wrong!')</script>";
+                }
+      }
+  
+  ?>
 
-                    column
-                      .search(val ? "^" + val + "$" : "", true, false)
-                      .draw();
-                  });
+  <!-- General JS Scripts -->
+  <script src="../assets/modules/jquery.min.js"></script>
+  <script src="../assets/modules/popper.js"></script>
+  <script src="../assets/modules/tooltip.js"></script>
+  <script src="../assets/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="../assets/modules/moment.min.js"></script>
+  <script src="../assets/js/stisla.js"></script>
+  
+  <!-- JS Libraies -->
+  <script src="../assets/modules/datatables/datatables.min.js"></script>
+  <script src="../assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+  <script src="../assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
+  <script src="../assets/modules/jquery-ui/jquery-ui.min.js"></script>
 
-                column
-                  .data()
-                  .unique()
-                  .sort()
-                  .each(function (d, j) {
-                    select.append(
-                      '<option value="' + d + '">' + d + "</option>"
-                    );
-                  });
-              });
-          },
-        });
-
-        // Add Row
-        $("#add-row").DataTable({
-          pageLength: 5,
-        });
-
-        var action =
-          '<td> <div class="form-button-action"> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
-
-        $("#addRowButton").click(function () {
-          $("#add-row")
-            .dataTable()
-            .fnAddData([
-              $("#addName").val(),
-              $("#addPosition").val(),
-              $("#addOffice").val(),
-              action,
-            ]);
-          $("#addRowModal").modal("hide");
-        });
-      });
-    </script>
-  </body>
+  <!-- Page Specific JS File -->
+  <script src="../assets/js/page/modules-datatables.js"></script>
+  
+  <!-- Template JS File -->
+  <script src="../assets/js/scripts.js"></script>
+  <script src="../assets/js/custom.js"></script>
+</body>
 </html>

@@ -1,3 +1,55 @@
+<?php
+
+
+	if(isset($_POST['submit']))
+	{
+		include('include/connection.php');
+
+		$username = $_POST['username'];
+		$password = md5($_POST['password']);
+
+		session_start();
+
+            $user = mysqli_query($con, "SELECT * FROM users WHERE username = '$username' and active = 1");
+            $rowuser = mysqli_fetch_array($user);
+
+            $checkusername = mysqli_num_rows($user);
+
+            if($checkusername > 0)
+            {
+              if ($password === $rowuser['password']) {
+
+                session_regenerate_id();
+
+                $_SESSION['loggedin'] = TRUE;
+                $_SESSION['role'] = $rowuser['role'];
+                $_SESSION['username'] = $rowuser['username'];
+                $_SESSION['id'] = $rowuser['id'];
+
+                if($rowuser['role'] == 1)
+                {
+                    header('location: admin/index.php');
+                }
+                else if($rowuser['role'] == 2) {
+                    $id = $_SESSION['id'];
+                    $client = mysqli_query($con, "SELECT * FROM clients WHERE user_id = '$id'");
+                    $res = mysqli_fetch_array($client);
+                    $_SESSION['fullname'] = $res['client_name'];
+                    $_SESSION['client_id'] = $res['id'];
+                    header('location: clients/index.php');
+                }
+                
+
+              } else {
+                echo "<script>alert('Invalid Password.')</script>";
+              }
+            } else {
+                echo "<script>alert('Invalid Username or Password.')</script>";
+            }
+	}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,21 +82,21 @@
 					<img src="login/images/img-01.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" method="POST">
 					<span class="login100-form-title">
 						Member Login
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email">
+						<input class="input100" type="text" name="username" placeholder="Username">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
+							<i class="fa fa-user" aria-hidden="true"></i>
 						</span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+						<input class="input100" type="password" name="password" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -52,7 +104,7 @@
 					</div>
 					
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" type="submit" name="submit">
 							Login
 						</button>
 					</div>
