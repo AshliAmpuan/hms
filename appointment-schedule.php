@@ -80,12 +80,12 @@
     <!-- Page Header Start -->
     <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
-            <h1 class="display-3 text-white mb-3 animated slideInDown">Appointment</h1>
+            <h1 class="display-3 text-white mb-3 animated slideInDown">On Going</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb text-uppercase mb-0">
                     <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
                     <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                    <li class="breadcrumb-item text-primary active" aria-current="page">Appointment</li>
+                    <li class="breadcrumb-item text-primary active" aria-current="page">On Going Construction</li>
                 </ol>
             </nav>
         </div>
@@ -93,62 +93,21 @@
     <!-- Page Header End -->
 
 
-    <!-- Appointment Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
-                    <p class="d-inline-block border rounded-pill py-1 px-4">Appointment</p>
-                    <h1 class="mb-4">Make An Appointment To Visit Our Doctor</h1>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                    <div class="bg-light rounded d-flex align-items-center p-5 mb-4">
-                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-white" style="width: 55px; height: 55px;">
-                            <i class="fa fa-phone-alt text-primary"></i>
-                        </div>
-                        <div class="ms-4">
-                            <p class="mb-2">Call Us Now</p>
-                            <h5 class="mb-0">+012 345 6789</h5>
-                        </div>
-                    </div>
-                    <div class="bg-light rounded d-flex align-items-center p-5">
-                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-white" style="width: 55px; height: 55px;">
-                            <i class="fa fa-envelope-open text-primary"></i>
-                        </div>
-                        <div class="ms-4">
-                            <p class="mb-2">Mail Us Now</p>
-                            <h5 class="mb-0">info@example.com</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.5s">
-                    <h1 class="mb-4">Laboratories</h1>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                    <div class="row">
-                    <?php 
-
-                            include('include/connection.php');
-
-                            $query = mysqli_query($con, "SELECT * FROM laboratory WHERE active = 1");
-                            while($row = mysqli_fetch_array($query)){
-                            ?>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="service-item bg-light rounded h-100 p-5">
-                                <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                                    <i class="fa fa-vials text-primary fs-4"></i>
-                                </div>
-                                <h4 class="mb-3"><?php echo $row['laboratory_name']; ?></h4>
-                                <p>&#8369; <?php echo number_format($row['price'], 2); ?></p>
-                                <p class="mb-4"><?php echo $row['details']; ?></p>
-                                <a class="btn" href="appointment-schedule.php"><i class="fa fa-plus text-primary"></i>See the Schedule</a>
-                            </div>
-                            </div>
-                            <?php } ?>
-                    </div>
+    <!-- 404 Start -->
+    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <i class="bi bi-exclamation-triangle display-1 text-primary"></i>
+                    <h1 class="display-1">On Going</h1>
+                    <h1 class="mb-4">Under Construction</h1>
+                    <p class="mb-4">We’re sorry, the page you have looked for in under construction in our website! Maybe go to our home page</p>
+                    <a class="btn btn-primary rounded-pill py-3 px-5" href="index.php">Go Back To Home</a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Appointment End -->
+    <!-- 404 End -->
         
 
     <!-- Footer Start -->

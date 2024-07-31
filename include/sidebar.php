@@ -15,13 +15,20 @@
               </ul>
             </li>
             <li class="menu-header">Starter</li>
-            <?php if($_SESSION['role'] = 1) { ?>
+            <?php
+              $id = $_SESSION['id'];
+              $queryUser = mysqli_query($con, "SELECT * FROM users WHERE id = '$id'");
+              $rowUser = mysqli_fetch_array($queryUser);
+            
+            ?>
+            <?php if($rowUser['role'] === 1) { ?>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-database"></i> <span>Entry</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="users.php">Users</a></li>
                 <li><a class="nav-link" href="cashier.php">Cashier</a></li>
                 <li><a class="nav-link" href="doctor.php">Doctor</a></li>
+                <li><a class="nav-link" href="laboratory.php">Laboratory</a></li>
               </ul>
             </li>
             <?php } ?>
