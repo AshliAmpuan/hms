@@ -1,5 +1,5 @@
 <?php
-  include('../include/cashier_session.php');
+  include('../include/patient_session.php');
   // session_start();
 ?>
 <!DOCTYPE html>

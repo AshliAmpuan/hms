@@ -27,23 +27,26 @@ if(isset($_POST['submit']))
 
               if($rowuser['role'] == 1)
               {
+                  $_SESSION['role'] = $rowuser['role'];
                   header('location: admin/index.php');
               }
               else if($rowuser['role'] == 2) {
                   $id = $_SESSION['id'];
+                  $_SESSION['role'] = $rowuser['role'];
                   $client = mysqli_query($con, "SELECT * FROM cashier WHERE user_id = '$id'");
                   $res = mysqli_fetch_array($client);
                   $_SESSION['fullname'] = $res['fullname'];
-                  $_SESSION['client_id'] = $res['id'];
+                  $_SESSION['cashier_id'] = $res['id'];
                   echo "<script>window.location.replace('cashier/index.php')</script>";
               }
               else  if($rowuser['role'] == 3)
               {
                   $id = $_SESSION['id'];
+                  $_SESSION['role'] = $rowuser['role'];
                   $client = mysqli_query($con, "SELECT * FROM patient WHERE user_id = '$id'");
                   $res = mysqli_fetch_array($client);
                   $_SESSION['fullname'] = $res['firstname'].' '.$res['lastname'];
-                  $_SESSION['client_id'] = $res['id'];
+                  $_SESSION['patient_id'] = $res['id'];
                   echo "<script>window.location.replace('patient/index.php')</script>";
               }
               

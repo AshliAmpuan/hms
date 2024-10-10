@@ -1,4 +1,4 @@
-<?php include('../include/admin_session.php'); ?>
+<?php include('../include/patient_session.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,12 +43,12 @@
             <h1></h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Entry</a></div>
-              <div class="breadcrumb-item">Laboratory Management</div>
+              <div class="breadcrumb-item">Reservation</div>
             </div>
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">Laboratory Management</h2>
+            <h2 class="section-title">Reservation</h2>
             <!-- <p class="section-lead">
               We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
             </p> -->
@@ -56,9 +56,9 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Laboratory Table</h4>
+                    <h4>Reservation Table</h4>
                     <div class="card-header-action">
-                      <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Laboratory</button>
+                      <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Laboratory</button> -->
                     </div>
                   </div>
                   <div class="card-body">
@@ -70,16 +70,18 @@
                               #
                             </th>
                             <th>Laboratory</th>
-                            <th>Details</th>
+                            <th>Date</th>
                             <th>Price</th>
                             <th>Status</th>
                           </tr>
                         </thead>
                         <tbody>
                           <?php
-                            $query = mysqli_query($con, "SELECT *,
-                            (SELECT CASE WHEN active = 1 THEN 'active' ELSE 'Not Active' END) as status
-                             FROM laboratory");
+                          $id = $_SESSION['patient_id'];
+                            $query = mysqli_query($con, "SELECT laboratory.laboratory_name, reservation.tdate, laboratory.price, 
+                            (SELECT CASE WHEN reservation.status = 0 THEN 'PENDING' WHEN reservation.status = 1 THEN 'APPROVED' ELSE 'CANCELLED' END) 
+                            AS reservation_status, reservation.status FROM reservation INNER JOIN laboratory ON laboratory.id=reservation.laboratory_id 
+                            INNER JOIN patient ON patient.id=reservation.patient_id WHERE reservation.patient_id = $id");
                              $count = 0;
                             while($row = mysqli_fetch_array($query)){
                               $count += 1;
@@ -87,9 +89,13 @@
                           <tr>
                             <td><?php echo $count; ?></td>
                             <td><?php echo $row['laboratory_name']; ?></td>
-                            <td><?php echo $row['details']; ?></td>
+                            <td><?php echo $row['tdate']; ?></td>
                             <td><?php echo number_format($row['price'], 2); ?></td>
-                            <td><?php echo $row['status']; ?></td>
+                            <td>
+                                <div class="badge badge-<?php if($row['status'] == 0) { echo 'warning'; } else if($row['status'] == 1) { echo 'success'; } else { echo 'danger'; } ?>">
+                                    <?php echo $row['reservation_status']; ?>
+                                </div>
+                            </td>
                           </tr>
                           <?php } ?>
                         </tbody>
