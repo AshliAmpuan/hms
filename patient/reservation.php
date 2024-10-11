@@ -174,10 +174,16 @@ $(document).ready(function () {
             $tdate = $_POST['date'];
             $time = $_POST['time'];
 
-            $reference = rand(10,10000000);
+            $reference = uniqid();
 
             $insert = mysqli_query($con, "INSERT INTO `reservation` (`reference`, `laboratory_id`, `patient_id`, `tdate`, `time`)
             VALUES ('$reference', '$laboratory', '$id', '$tdate', '$time')");
+
+            $last_id = mysqli_insert_id($con);
+
+            echo "<script type='text/javascript'>
+            window.open('print.php?id=$last_id', '_blank');
+            </script>";
 
             echo "<script>window.location.replace('reservation.php')</script>";
         }

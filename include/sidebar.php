@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.php">Stisla</a>
+            <a href="index.php">HMS</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.php">St</a>
