@@ -44,25 +44,25 @@
                   <div class="row">
                     <div class="form-group col-6">
                       <label for="frist_name">First Name</label>
-                      <input id="frist_name" type="text" class="form-control" name="firstname" autofocus>
+                      <input id="frist_name" type="text" class="form-control" name="firstname" required autofocus>
                     </div>
                     <div class="form-group col-6">
                       <label for="last_name">Last Name</label>
-                      <input id="last_name" type="text" class="form-control" name="lastname">
+                      <input id="last_name" type="text" class="form-control" required name="lastname">
                     </div>
                   </div>
 
                     <div class="row">
                     <div class="form-group col-6">
                     <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control" name="email">
+                    <input id="email" type="email" class="form-control" required name="email">
                     <div class="invalid-feedback">
                     </div>
                   </div>
 
                   <div class="form-group col-6">
                     <label for="username">Username</label>
-                    <input id="username" type="text" class="form-control" name="username">
+                    <input id="username" type="text" class="form-control" required name="username">
                   </div>
                     </div>
                   
@@ -70,7 +70,7 @@
                   <div class="row">
                     <div class="form-group col-6">
                       <label for="password" class="d-block">Password</label>
-                      <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="password">
+                      <input id="password" type="password" class="form-control pwstrength" required data-indicator="pwindicator" name="password">
                       <div id="pwindicator" class="pwindicator">
                         <div class="bar"></div>
                         <div class="label"></div>
@@ -78,13 +78,13 @@
                     </div>
                     <div class="form-group col-6">
                       <label for="contact_number" class="d-block">Contact Number</label>
-                      <input id="contact_number" type="text" class="form-control" name="contact_number">
+                      <input id="contact_number" type="text" class="form-control" required name="contact_number">
                     </div>
                   </div>
 
                   <div class="row">
                     <label for="contact_number" class="d-block">Address</label>
-                    <textarea name="address" class="form-control" id="" rows="6"></textarea>
+                    <textarea name="address" class="form-control" id="" required rows="6"></textarea>
                   </div>
 
                   <div class="form-group mt-5">

@@ -78,7 +78,7 @@
                         <tbody>
                           <?php
                           $id = $_SESSION['patient_id'];
-                            $query = mysqli_query($con, "SELECT laboratory.laboratory_name, reservation.tdate, laboratory.price, 
+                            $query = mysqli_query($con, "SELECT reservation.id, laboratory.laboratory_name, reservation.tdate, laboratory.price, 
                             (SELECT CASE WHEN reservation.status = 0 THEN 'PENDING' WHEN reservation.status = 1 THEN 'APPROVED' ELSE 'CANCELLED' END) 
                             AS reservation_status, reservation.status FROM reservation INNER JOIN laboratory ON laboratory.id=reservation.laboratory_id 
                             INNER JOIN patient ON patient.id=reservation.patient_id WHERE reservation.patient_id = $id");
@@ -92,9 +92,12 @@
                             <td><?php echo $row['tdate']; ?></td>
                             <td><?php echo number_format($row['price'], 2); ?></td>
                             <td>
-                                <div class="badge badge-<?php if($row['status'] == 0) { echo 'warning'; } else if($row['status'] == 1) { echo 'success'; } else { echo 'danger'; } ?>">
+                                <button class="btn btn-<?php if($row['status'] == 0) { echo 'warning'; } else if($row['status'] == 1) { echo 'success'; } else { echo 'danger'; } ?> btn-sm">
                                     <?php echo $row['reservation_status']; ?>
-                                </div>
+                                </button>
+                                <?php if($row['status'] == 1) { ?>
+                                  <a href="viewfiles.php?id=<?php echo $row['id']; ?>" target="_blank" class="btn btn-primary btn-sm"> View Files</a>
+                                <?php } ?>
                             </td>
                           </tr>
                           <?php } ?>

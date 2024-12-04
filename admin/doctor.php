@@ -27,6 +27,8 @@
 
   gtag('config', 'UA-94034622-3');
 </script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 <!-- /END GA --></head>
 
 <body>
@@ -70,6 +72,7 @@
                               #
                             </th>
                             <th>Fullname</th>
+                            <th>Category</th>
                             <th>Contact Number</th>
                             <th>Address</th>
                             <th>Status</th>
@@ -83,10 +86,19 @@
                              $count = 0;
                             while($row = mysqli_fetch_array($query)){
                               $count += 1;
+                              $doctor_id = $row['id'];
                           ?>
                           <tr>
                             <td><?php echo $count; ?></td>
                             <td><?php echo $row['fullname']; ?></td>
+                            <td>
+                              <?php
+                                $category = mysqli_query($con, "SELECT * FROM doctor_laboratory INNER JOIN laboratory ON laboratory.id=doctor_laboratory.laboratory_id WHERE doctor_id = $doctor_id");
+                                while($row_category = mysqli_fetch_array($category)){
+                              ?>
+                              <div class="badge badge-success"><?php echo $row_category['laboratory_name']; ?></div>
+                            <?php } ?>
+                            </td>
                             <td><?php echo $row['contact_number']; ?></td>
                             <td><?php echo $row['address']; ?></td>
                             <td><?php echo $row['status']; ?></td>
@@ -114,7 +126,23 @@
               <div class="modal-body">
                 <form method="POST">
                   <div class="row">
-                      <!-- <div class="col-lg-6">
+                    <div class="col-md-12">
+                      <div class="form-group">
+												<label for="recipient-name" class="col-form-label">Laboratory</label><br>
+                        <select class="form-control h-100" multiple="multiple" name="laboratory[]">
+                              <!-- <option value="#" selected disabled>Choose..</option> -->
+                              <?php
+
+                                $query = mysqli_query($con, "SELECT * FROM laboratory");
+                                while($row = mysqli_fetch_array($query)){
+                              ?>
+                              <option value="<?php echo $row['id']; ?>"><?php echo $row['laboratory_name']; ?></option>
+                              <?php } ?>
+                      </select>
+											</div>
+                      
+                    </div>  
+                    <div class="col-lg-6">
                         <div class="form-group">
                           <label>Username</label>
                           <div class="input-group">
@@ -139,7 +167,7 @@
                             <input type="password" class="form-control" placeholder="Password" name="password">
                           </div>
                         </div>
-                      </div> -->
+                      </div>
                       <div class="col-lg-6">
                         <div class="form-group">
                           <label>Fullname</label>
@@ -195,12 +223,32 @@
           $fullname = $_POST['fullname'];
           $contact_number = $_POST['contact_number'];
           $address = $_POST['address'];
+          $laboratory = $_POST['laboratory'];
+          $username = $_POST['username'];
+          $password = md5($_POST['password']);
 
-          $doctor = mysqli_query($con, "INSERT INTO doctor (`fullname`, `address`, `contact_number`) VALUES ('$fullname', '$address', '$contact_number')");
+          $user = mysqli_query($con, "INSERT INTO users (`username`, `password`, `role`) VALUES ('$username', '$password', 4)");
+
+          $user_detail = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'");
+          $rowUser = mysqli_fetch_array($user_detail);
+          $user_id = $rowUser['id'];
+
+          $doctor = mysqli_query($con, "INSERT INTO doctor (`fullname`, `address`, `contact_number`, `user_id`) VALUES ('$fullname', '$address', '$contact_number', '$user_id')");
                 if($doctor)
                 {
+                    
+
+                    $last_insert_id = mysqli_query($con, "SELECT id FROM doctor WHERE user_id = $user_id");
+                    $result = mysqli_fetch_array($last_insert_id);
+                    $last_id = $result['id'];
+                    foreach($laboratory as $laboratorys)
+                    {
+                        mysqli_query($con, "INSERT INTO doctor_laboratory (`doctor_id`, `laboratory_id`) VALUES ('$last_id', '$laboratorys')");
+                    }
+
+                    
                     echo "<script>alert('Doctor Add Successfully!')</script>";
-                    echo "<script>location.replace('cashier.php')</script>";
+                    echo "<script>location.replace('doctor.php')</script>";
                 }
                 else
                 {
@@ -211,6 +259,7 @@
   ?>
 
   <!-- General JS Scripts -->
+   
   <script src="../assets/modules/jquery.min.js"></script>
   <script src="../assets/modules/popper.js"></script>
   <script src="../assets/modules/tooltip.js"></script>
@@ -231,5 +280,11 @@
   <!-- Template JS File -->
   <script src="../assets/js/scripts.js"></script>
   <script src="../assets/js/custom.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#js-example-basic-single').select2();
+    });
+  </script>
 </body>
 </html>

@@ -25,7 +25,12 @@ if(isset($_POST['submit']))
               $_SESSION['username'] = $rowuser['username'];
               $_SESSION['id'] = $rowuser['id'];
 
-              if($rowuser['role'] == 1)
+              if($rowuser['role'] == 0)
+              {
+                  $_SESSION['role'] = $rowuser['role'];
+                  header('location: superadmin/index.php');
+              }
+              else if($rowuser['role'] == 1)
               {
                   $_SESSION['role'] = $rowuser['role'];
                   header('location: admin/index.php');
@@ -49,7 +54,16 @@ if(isset($_POST['submit']))
                   $_SESSION['patient_id'] = $res['id'];
                   echo "<script>window.location.replace('patient/index.php')</script>";
               }
-              
+              else  if($rowuser['role'] == 4)
+              {
+                  $id = $_SESSION['id'];
+                  $_SESSION['role'] = $rowuser['role'];
+                  $client = mysqli_query($con, "SELECT * FROM doctor WHERE user_id = '$id'");
+                  $res = mysqli_fetch_array($client);
+                  $_SESSION['fullname'] = $res['fullname'];
+                  $_SESSION['doctor_id'] = $res['id'];
+                  echo "<script>window.location.replace('doctor/index.php')</script>";
+              }
 
             } else {
               echo "<script>alert('Invalid Password.')</script>";

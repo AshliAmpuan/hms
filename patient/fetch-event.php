@@ -6,7 +6,7 @@
     // $parent_id = $res['id'];
     $json = array();
     $sqlQuery = "SELECT CONCAT(count(reservation.id), ' - ', laboratory.laboratory_name) as title, laboratory.laboratory_name, laboratory.id, reservation.tdate as start FROM laboratory 
-                                                            INNER JOIN reservation ON reservation.laboratory_id=laboratory.id GROUP BY laboratory.laboratory_name, laboratory.id, reservation.tdate";
+                                                            INNER JOIN reservation ON reservation.laboratory_id=laboratory.id WHERE add_to_checkout = 1 GROUP BY laboratory.laboratory_name, laboratory.id, reservation.tdate";
 
     $result = mysqli_query($con, $sqlQuery);
     $eventArray = array();

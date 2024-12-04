@@ -3,7 +3,7 @@
     include('../include/connection.php');
     session_start();
 
-    if($_SESSION['role'] == 1 || $_SESSION['role'] == 0 || $_SESSION['role'] == 2 || $_SESSION['role'] == 4)
+    if($_SESSION['role'] == 1 || $_SESSION['role'] == 0 || $_SESSION['role'] == 3 || $_SESSION['role'] == 2)
     {
         session_destroy();
         header('location: ../index.php');

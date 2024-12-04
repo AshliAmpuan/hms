@@ -1,4 +1,7 @@
-<?php include('../include/admin_session.php'); ?>
+<?php
+  include('../include/doctor_session.php');
+  // session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +46,7 @@
           <div class="section-header">
             <h1>Dashboard</h1>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
@@ -51,29 +54,40 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Patient</h4>
+                    <h4>Total Admin</h4>
                   </div>
                   <div class="card-body">
-                  <?php $query = mysqli_query($con, "SELECT COUNT(*) AS count FROM patient");
-                    $row = mysqli_fetch_array($query); ?>
-                    <?php echo $row['count']; ?>
+                    10
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
-                <div class="card-icon bg-info">
-                  <i class="fas fa-database"></i>
+                <div class="card-icon bg-danger">
+                  <i class="far fa-newspaper"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Total Reservation</h4>
+                    <h4>News</h4>
                   </div>
                   <div class="card-body">
-                  <?php $query = mysqli_query($con, "SELECT COUNT(*) AS count FROM reservation");
-                    $row = mysqli_fetch_array($query); ?>
-                    <?php echo $row['count']; ?>
+                    42
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+              <div class="card card-statistic-1">
+                <div class="card-icon bg-warning">
+                  <i class="far fa-file"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Reports</h4>
+                  </div>
+                  <div class="card-body">
+                    1,201
                   </div>
                 </div>
               </div>
@@ -81,41 +95,18 @@
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
                 <div class="card-icon bg-success">
-                  <i class="fas fa-money-bill"></i>
+                  <i class="fas fa-circle"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Sales</h4>
+                    <h4>Online Users</h4>
                   </div>
                   <div class="card-body">
-                  <?php $query = mysqli_query($con, "SELECT SUM(price) AS price FROM transaction");
-                    $row = mysqli_fetch_array($query); ?>
-                    <?php echo $row['price'] != null ? number_format($row['price'], 2) : 0.00; ?>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-              <div class="card card-statistic-1">
-                <div class="card-icon bg-secondary">
-                  <i class="fas fa-recycle"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Transaction Today</h4>
-                  </div>
-                  <div class="card-body">
-                  <?php 
-                  date_default_timezone_set("Asia/Manila");
-                  $tdate = date("Y-m-d");            
-                  $query = mysqli_query($con, "SELECT COUNT(*) AS count FROM transaction WHERE tdate = '$tdate'");
-                    $row = mysqli_fetch_array($query); ?>
-                    <?php echo number_format($row['count'], 0); ?>
                   </div>
                 </div>
               </div>
             </div>                  
-          </div>
+          </div> -->
           <div class="row">
             <!-- <div class="col-lg-8 col-md-12 col-12 col-sm-12">
               <div class="card">
@@ -631,14 +622,7 @@
           </div>
         </section>
       </div>
-      <footer class="main-footer">
-        <div class="footer-left">
-          Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
-        </div>
-        <div class="footer-right">
-          
-        </div>
-      </footer>
+     
     </div>
   </div>
 

@@ -1,4 +1,4 @@
-<?php include('../include/admin_session.php'); ?>
+<?php include('../include/doctor_session.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +27,17 @@
 
   gtag('config', 'UA-94034622-3');
 </script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -100; /* Ensure it's behind the modal */
+    }
+</style>
 <!-- /END GA --></head>
 
 <body>
@@ -43,12 +54,12 @@
             <h1></h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Entry</a></div>
-              <div class="breadcrumb-item">Laboratory Management</div>
+              <div class="breadcrumb-item">Pending Management</div>
             </div>
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">Laboratory Management</h2>
+            <h2 class="section-title">Pending Management</h2>
             <!-- <p class="section-lead">
               We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
             </p> -->
@@ -56,44 +67,48 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Laboratory Table</h4>
+                    <h4>Pending Table</h4>
                     <div class="card-header-action">
-                      <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Laboratory</button>
+                      <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Doctor</button> -->
                     </div>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
                       <table class="table table-striped" id="table-1">
                         <thead>
-                          <tr>
+                        <tr>
                           <th>
                               #
                             </th>
-                            <th>Category</th>
-                            <th>Laboratory</th>
-                            <th>Details</th>
-                            <th>Price</th>
-                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Reference</th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
                           <?php
-                            $query = mysqli_query($con, "SELECT *,
-                            (SELECT CASE WHEN laboratory.active = 1 THEN 'active' ELSE 'Not Active' END) as status
-                             FROM laboratory INNER JOIN category ON category.id=laboratory.category_id");
+                          $doctor_id = $_SESSION['doctor_id'];
+                            $query = mysqli_query($con, "SELECT reservation.reference, reservation.tdate FROM reservation  WHERE reservation.doctor_id = $doctor_id AND add_to_checkout = 1 AND status = 0
+                            GROUP BY reservation.reference, reservation.tdate");
                              $count = 0;
                             while($row = mysqli_fetch_array($query)){
                               $count += 1;
                           ?>
                           <tr>
                             <td><?php echo $count; ?></td>
-                            <td><?php echo $row['category']; ?></td>
-                            <td><?php echo $row['laboratory_name']; ?></td>
-                            <td><?php echo $row['details']; ?></td>
-                            <td><?php echo number_format($row['price'], 2); ?></td>
-                            <td><?php echo $row['status']; ?></td>
+                            <td><?php echo $row['tdate']; ?></td>
+                            <td><?php echo $row['reference']; ?></td>
+                            <td>
+                                <a href="viewtransaction.php?reference=<?php echo $row['reference']; ?>" target="_blank" class="btn btn-primary btn-sm" ><i class="fa fa-eye"></i></a>
+                                <a class="btn btn-success btn-sm" data-backdrop="static" data-toggle="modal" data-target="#exampleModal<?php echo $row['reference']; ?>"><i class="fa fa-check"></i></a> 
+                                <a href="#" class="btn btn-danger btn-sm" data-backdrop="static" data-toggle="modal" data-target="#exampleModaldecline<?php echo $row['reference']; ?>"><i class="fa fa-times"></i></a> </td>
                           </tr>
-                          <?php } ?>
+                          <?php
+                        
+                             include('modals/accept.php');   
+                             include('modals/decline.php');  
+                        
+                        } ?>
                         </tbody>
                       </table>
                     </div>
@@ -108,7 +123,7 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Add Laboratory</h5>
+                <h5 class="modal-title">Add Doctor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -116,73 +131,79 @@
               <div class="modal-body">
                 <form method="POST">
                   <div class="row">
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label>Category</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fas fa-user"></i>
-                              </div>
-                            </div>
-                            <select name="category" class="form-control" id="">
-                              <option value="#" selected disabled>Choose..</option>
+                    <div class="col-md-12">
+                      <div class="form-group">
+												<label for="recipient-name" class="col-form-label">Laboratory</label><br>
+                        <select class="form-control h-100" multiple="multiple" name="laboratory[]">
+                              <!-- <option value="#" selected disabled>Choose..</option> -->
                               <?php
 
-                                $category = mysqli_query($con, "SELECT * FROM category WHERE active = 1");
-                                while($row = mysqli_fetch_array($category)){
-                              
+                                $query = mysqli_query($con, "SELECT * FROM laboratory");
+                                while($row = mysqli_fetch_array($query)){
                               ?>
-                                <option value="<?php echo $row['id']; ?>"><?php echo $row['category']; ?></option>
+                              <option value="<?php echo $row['id']; ?>"><?php echo $row['laboratory_name']; ?></option>
                               <?php } ?>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
+                      </select>
+											</div>
+                      
+                    </div>  
+                    <div class="col-lg-6">
                         <div class="form-group">
-                          <label>Laboratory</label>
+                          <label>Username</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
                                 <i class="fas fa-user"></i>
                               </div>
                             </div>
-                            <input type="text" class="form-control" placeholder="Laboratory" name="laboratory">
+                            <input type="text" class="form-control" placeholder="Username" name="username">
                           </div>
                         </div>
                       </div>
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label>Price</label>
+                          <label>Password</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
-                                <i class="fas fa-money"></i>
+                                <i class="fas fa-lock"></i>
                               </div>
                             </div>
-                            <input type="number" class="form-control" placeholder="Price" name="price">
+                            <input type="password" class="form-control" placeholder="Password" name="password">
                           </div>
                         </div>
                       </div>
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label>Capacity Per Day</label>
+                          <label>Fullname</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
-                                <i class="fas fa-money"></i>
+                                <i class="fas fa-user"></i>
                               </div>
                             </div>
-                            <input type="number" class="form-control" placeholder="Capacity" name="capacity">
+                            <input type="text" class="form-control" placeholder="Fullname" name="fullname">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>Contact Number</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-phone"></i>
+                              </div>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Contact Number" name="contact_number">
                           </div>
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <label>Details</label>
+                          <label>Address</label>
                           <div class="input-group">
-                            <textarea name="details" class="form-control" id="" row="6"></textarea>
+                            <textarea name="address" class="form-control" id="" row="6"></textarea>
                           </div>
                         </div>
                       </div>
@@ -204,17 +225,35 @@
 
       if(isset($_POST['submit']))
       {
+          $fullname = $_POST['fullname'];
+          $contact_number = $_POST['contact_number'];
+          $address = $_POST['address'];
           $laboratory = $_POST['laboratory'];
-          $price = $_POST['price'];
-          $category = $_POST['category'];
-          $details = $_POST['details'];
-          $capacity = $_POST['capacity'];
+          $username = $_POST['username'];
+          $password = md5($_POST['password']);
 
-          $laboratoryinsert = mysqli_query($con, "INSERT INTO laboratory (`category_id`, `laboratory_name`, `details`, `price`, `capacity_per_day`) VALUES ('$category', '$laboratory', '$details', '$price', '$capacity')");
-                if($laboratoryinsert)
+          $user = mysqli_query($con, "INSERT INTO users (`username`, `password`, `role`) VALUES ('$username', '$password', 4)");
+
+          $user_detail = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'");
+          $rowUser = mysqli_fetch_array($user_detail);
+          $user_id = $rowUser['id'];
+
+          $doctor = mysqli_query($con, "INSERT INTO doctor (`fullname`, `address`, `contact_number`, `user_id`) VALUES ('$fullname', '$address', '$contact_number', '$user_id')");
+                if($doctor)
                 {
-                    echo "<script>alert('Laboratory Add Successfully!')</script>";
-                    echo "<script>location.replace('laboratory.php')</script>";
+                    
+
+                    $last_insert_id = mysqli_query($con, "SELECT id FROM doctor WHERE user_id = $user_id");
+                    $result = mysqli_fetch_array($last_insert_id);
+                    $last_id = $result['id'];
+                    foreach($laboratory as $laboratorys)
+                    {
+                        mysqli_query($con, "INSERT INTO doctor_laboratory (`doctor_id`, `laboratory_id`) VALUES ('$last_id', '$laboratorys')");
+                    }
+
+                    
+                    echo "<script>alert('Doctor Add Successfully!')</script>";
+                    echo "<script>location.replace('doctor.php')</script>";
                 }
                 else
                 {
@@ -225,6 +264,7 @@
   ?>
 
   <!-- General JS Scripts -->
+   
   <script src="../assets/modules/jquery.min.js"></script>
   <script src="../assets/modules/popper.js"></script>
   <script src="../assets/modules/tooltip.js"></script>
@@ -245,5 +285,11 @@
   <!-- Template JS File -->
   <script src="../assets/js/scripts.js"></script>
   <script src="../assets/js/custom.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#js-example-basic-single').select2();
+    });
+  </script>
 </body>
 </html>

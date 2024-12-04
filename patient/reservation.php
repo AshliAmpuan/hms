@@ -64,7 +64,8 @@ $(document).ready(function () {
             if(start >= dateToday)
             {
                 $('#date').val(start);
-                $('#calendarModal').modal();
+                // $('#calendarModal').modal();
+                window.location.replace('reserve.php?date=' + start)
 
             }
             calendar.fullCalendar('unselect');

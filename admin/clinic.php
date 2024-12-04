@@ -43,12 +43,12 @@
             <h1></h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Entry</a></div>
-              <div class="breadcrumb-item">Laboratory Management</div>
+              <div class="breadcrumb-item">Clinic Management</div>
             </div>
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">Laboratory Management</h2>
+            <h2 class="section-title">Clinic Management</h2>
             <!-- <p class="section-lead">
               We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
             </p> -->
@@ -56,42 +56,33 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Laboratory Table</h4>
+                    <h4>Clinic Table</h4>
                     <div class="card-header-action">
-                      <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Laboratory</button>
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Clinic</button>
                     </div>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table table-striped" id="table-1">
+                    <table class="table table-striped" id="table-1">
                         <thead>
                           <tr>
                           <th>
                               #
                             </th>
-                            <th>Category</th>
-                            <th>Laboratory</th>
-                            <th>Details</th>
-                            <th>Price</th>
-                            <th>Status</th>
+                            <th>Clinic</th>
                           </tr>
                         </thead>
                         <tbody>
                           <?php
-                            $query = mysqli_query($con, "SELECT *,
-                            (SELECT CASE WHEN laboratory.active = 1 THEN 'active' ELSE 'Not Active' END) as status
-                             FROM laboratory INNER JOIN category ON category.id=laboratory.category_id");
+                            $query = mysqli_query($con, "SELECT *
+                             FROM clinic");
                              $count = 0;
                             while($row = mysqli_fetch_array($query)){
                               $count += 1;
                           ?>
                           <tr>
                             <td><?php echo $count; ?></td>
-                            <td><?php echo $row['category']; ?></td>
-                            <td><?php echo $row['laboratory_name']; ?></td>
-                            <td><?php echo $row['details']; ?></td>
-                            <td><?php echo number_format($row['price'], 2); ?></td>
-                            <td><?php echo $row['status']; ?></td>
+                            <td><?php echo $row['clinic_name']; ?></td>
                           </tr>
                           <?php } ?>
                         </tbody>
@@ -108,7 +99,7 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Add Laboratory</h5>
+                <h5 class="modal-title">Add Clinic</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -116,73 +107,16 @@
               <div class="modal-body">
                 <form method="POST">
                   <div class="row">
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label>Category</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fas fa-user"></i>
-                              </div>
-                            </div>
-                            <select name="category" class="form-control" id="">
-                              <option value="#" selected disabled>Choose..</option>
-                              <?php
-
-                                $category = mysqli_query($con, "SELECT * FROM category WHERE active = 1");
-                                while($row = mysqli_fetch_array($category)){
-                              
-                              ?>
-                                <option value="<?php echo $row['id']; ?>"><?php echo $row['category']; ?></option>
-                              <?php } ?>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label>Laboratory</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fas fa-user"></i>
-                              </div>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Laboratory" name="laboratory">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label>Price</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fas fa-money"></i>
-                              </div>
-                            </div>
-                            <input type="number" class="form-control" placeholder="Price" name="price">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <label>Capacity Per Day</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fas fa-money"></i>
-                              </div>
-                            </div>
-                            <input type="number" class="form-control" placeholder="Capacity" name="capacity">
-                          </div>
-                        </div>
-                      </div>
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <label>Details</label>
+                          <label>Clinic</label>
                           <div class="input-group">
-                            <textarea name="details" class="form-control" id="" row="6"></textarea>
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-user"></i>
+                              </div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Clinic" name="clinic">
                           </div>
                         </div>
                       </div>
@@ -204,17 +138,13 @@
 
       if(isset($_POST['submit']))
       {
-          $laboratory = $_POST['laboratory'];
-          $price = $_POST['price'];
-          $category = $_POST['category'];
-          $details = $_POST['details'];
-          $capacity = $_POST['capacity'];
+          $clinic = $_POST['clinic'];
 
-          $laboratoryinsert = mysqli_query($con, "INSERT INTO laboratory (`category_id`, `laboratory_name`, `details`, `price`, `capacity_per_day`) VALUES ('$category', '$laboratory', '$details', '$price', '$capacity')");
-                if($laboratoryinsert)
+          $categoryinsert = mysqli_query($con, "INSERT INTO clinic (`clinic_name`) VALUES ('$clinic')");
+                if($categoryinsert)
                 {
-                    echo "<script>alert('Laboratory Add Successfully!')</script>";
-                    echo "<script>location.replace('laboratory.php')</script>";
+                    echo "<script>alert('Category Add Successfully!')</script>";
+                    echo "<script>location.replace('clinic.php')</script>";
                 }
                 else
                 {

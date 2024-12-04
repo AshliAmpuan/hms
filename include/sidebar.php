@@ -26,8 +26,10 @@
               <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-database"></i> <span>Entry</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="users.php">Users</a></li>
+                <li><a class="nav-link" href="clinic.php">Clinic</a></li>
                 <li><a class="nav-link" href="cashier.php">Cashier</a></li>
                 <li><a class="nav-link" href="doctor.php">Doctor</a></li>
+                <li><a class="nav-link" href="category.php">Category</a></li>
                 <li><a class="nav-link" href="laboratory.php">Laboratory</a></li>
               </ul>
             </li>
@@ -39,6 +41,15 @@
                   <li><a class="nav-link" href="rptreservation.php">Reservation</a></li>
                 </ul>
               </li>
+              <?php } else if($rowUser['role'] == 4) { ?>
+                <li class="dropdown">
+              <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-database"></i> <span>Transaction</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="pendingtransaction.php">Pending Transaction</a></li>
+                <li><a class="nav-link" href="accepttransaction.php">Accepted Transaction</a></li>
+                <li><a class="nav-link" href="canceltransaction.php">Cancelled Transaction</a></li>
+              </ul>
+            </li>
             <?php } else { ?>
               <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-database"></i> <span>Transaction Reports</span></a>
