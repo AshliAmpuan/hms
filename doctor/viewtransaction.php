@@ -81,6 +81,7 @@
                               #
                             </th>
                             <th>Date</th>
+                            <th>Patient</th>
                             <th>Reference</th>
                             <th>Category</th>
                             <th>Laboratory</th>
@@ -94,8 +95,10 @@
                           <?php
                           $reference = $_GET['reference'];
                           $doctor_id = $_SESSION['doctor_id'];
-                            $query = mysqli_query($con, "SELECT reservation.reference, reservation.id, laboratory.price, category.category, laboratory.laboratory_name, reservation.tdate FROM reservation 
-                            INNER JOIN laboratory ON laboratory.id=reservation.laboratory_id INNER JOIN category ON category.id=reservation.category_id WHERE reservation.reference = '$reference' AND reservation.doctor_id = '$doctor_id' AND add_to_checkout = 1
+                            $query = mysqli_query($con, "SELECT reservation.reference, patient.firstname, patient.lastname, reservation.id, laboratory.price, category.category, laboratory.laboratory_name, reservation.tdate FROM reservation 
+                            INNER JOIN laboratory ON laboratory.id=reservation.laboratory_id 
+                            INNER JOIN category ON category.id=reservation.category_id
+                            INNER JOIN patient ON patient.id=reservation.patient_id WHERE reservation.reference = '$reference' AND reservation.doctor_id = '$doctor_id' AND add_to_checkout = 1
                             ");
                              $count = 0;
                             while($row = mysqli_fetch_array($query)){
@@ -104,6 +107,7 @@
                           <tr>
                             <td><?php echo $count; ?></td>
                             <td><?php echo $row['tdate']; ?></td>
+                            <td><?php echo $row['firstname'].' '.$row['lastname']; ?></td>
                             <td><?php echo $row['reference']; ?></td>
                             <td><?php echo $row['category']; ?></td>
                             <td><?php echo $row['laboratory_name']; ?></td>

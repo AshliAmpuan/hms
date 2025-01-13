@@ -114,6 +114,28 @@
               <div class="modal-body">
                 <form method="POST">
                   <div class="row">
+                  <div class="col-lg-12">
+                        <div class="form-group">
+                          <label>Clinic</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-user"></i>
+                              </div>
+                            </div>
+                            <!-- <input type="text" class="form-control" placeholder="Category" name="category"> -->
+                             <select name="clinic" class="form-control" id="">
+                                <option value="#" selected disabled>Choose..</option>
+                                <?php
+                                    $query = mysqli_query($con, "SELECT * FROM clinic");
+                                    while($row = mysqli_fetch_array($query)) {
+                                ?>
+                                <option value="<?php echo $row['id']; ?>"><?php echo $row['clinic_name']; ?></option>
+                                <?php } ?>
+                             </select>
+                          </div>
+                        </div>
+                      </div>
                       <div class="col-lg-6">
                         <div class="form-group">
                           <label>Username</label>
@@ -197,6 +219,7 @@
           $fullname = $_POST['fullname'];
           $contact_number = $_POST['contact_number'];
           $address = $_POST['address'];
+          $clinic = $_POST['clinic'];
 
           $users = mysqli_query($con, "INSERT INTO users (`username`, `password`, `role`) VALUES ('$username', '$password', 2)");
           if($users)
@@ -207,7 +230,7 @@
               $rowUser = mysqli_num_rows($userLast);
               if($rowUser > 0)
               {
-                $cashier = mysqli_query($con, "INSERT INTO cashier (`fullname`, `address`, `contact_number`, `user_id`) VALUES ('$fullname', '$address', '$contact_number', '$user_id')");
+                $cashier = mysqli_query($con, "INSERT INTO cashier (`clinic_id`, `fullname`, `address`, `contact_number`, `user_id`) VALUES ('$clinic', '$fullname', '$address', '$contact_number', '$user_id')");
                 if($cashier)
                 {
                     echo "<script>alert('Cashier Add Successfully')</script>";

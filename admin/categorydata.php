@@ -3,14 +3,14 @@
 
     include('../include/connection.php');
 
-    $laboratory = $_GET['laboratory'];
+    $clinic = $_GET['clinic'];
 
     date_default_timezone_set('Asia/Manila');
                                                         $tdate = date("Y-m-d");
-                                                        $query = mysqli_query($con, "SELECT * FROM doctor_laboratory INNER JOIN doctor ON doctor.id=doctor_laboratory.doctor_id WHERE laboratory_id = $laboratory");
+                                                        $query = mysqli_query($con, "SELECT category.id, category FROM category WHERE clinic_id = $clinic");
                                                         while($row = mysqli_fetch_array($query)){
 ?>
 
-<option value="<?php echo $row['id']; ?>"><?php echo $row['fullname']; ?></option>
+<option value="<?php echo $row['id']; ?>"><?php echo $row['category']; ?></option>
 
 <?php } ?>

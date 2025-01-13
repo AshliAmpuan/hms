@@ -54,12 +54,12 @@
             <h1></h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Entry</a></div>
-              <div class="breadcrumb-item">Pending Management</div>
+              <div class="breadcrumb-item">Accepted Management</div>
             </div>
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">Pending Management</h2>
+            <h2 class="section-title">Accepted Management</h2>
             <!-- <p class="section-lead">
               We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
             </p> -->
@@ -67,7 +67,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Pending Table</h4>
+                    <h4>Accepted Table</h4>
                     <div class="card-header-action">
                       <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Doctor</button> -->
                     </div>
@@ -88,7 +88,9 @@
                         <tbody>
                           <?php
                           $doctor_id = $_SESSION['doctor_id'];
-                            $query = mysqli_query($con, "SELECT reservation.reference, reservation.tdate FROM reservation  WHERE reservation.doctor_id = $doctor_id AND add_to_checkout = 1 AND status = 1
+                          $clinic_id = $_SESSION['clinic_id'];
+                            $query = mysqli_query($con, "SELECT reservation.reference, reservation.tdate FROM reservation  
+                            WHERE reservation.doctor_id = $doctor_id AND add_to_checkout = 1 AND status = 1 AND reservation.clinic_id = $clinic_id
                             GROUP BY reservation.reference, reservation.tdate");
                              $count = 0;
                             while($row = mysqli_fetch_array($query)){

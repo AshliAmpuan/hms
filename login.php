@@ -24,13 +24,8 @@ if(isset($_POST['submit']))
               
               $_SESSION['username'] = $rowuser['username'];
               $_SESSION['id'] = $rowuser['id'];
-
-              if($rowuser['role'] == 0)
-              {
-                  $_SESSION['role'] = $rowuser['role'];
-                  header('location: superadmin/index.php');
-              }
-              else if($rowuser['role'] == 1)
+              
+              if($rowuser['role'] == 1)
               {
                   $_SESSION['role'] = $rowuser['role'];
                   header('location: admin/index.php');
@@ -42,6 +37,7 @@ if(isset($_POST['submit']))
                   $res = mysqli_fetch_array($client);
                   $_SESSION['fullname'] = $res['fullname'];
                   $_SESSION['cashier_id'] = $res['id'];
+                  $_SESSION['clinic_id'] = $res['clinic_id'];
                   echo "<script>window.location.replace('cashier/index.php')</script>";
               }
               else  if($rowuser['role'] == 3)
@@ -62,6 +58,7 @@ if(isset($_POST['submit']))
                   $res = mysqli_fetch_array($client);
                   $_SESSION['fullname'] = $res['fullname'];
                   $_SESSION['doctor_id'] = $res['id'];
+                  $_SESSION['clinic_id'] = $res['clinic_id'];
                   echo "<script>window.location.replace('doctor/index.php')</script>";
               }
 

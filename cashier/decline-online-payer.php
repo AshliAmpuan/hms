@@ -48,12 +48,12 @@
             <h1></h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Entry</a></div>
-              <div class="breadcrumb-item">Reservation</div>
+              <div class="breadcrumb-item">Decline Reservation</div>
             </div>
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">Reservation</h2>
+            <h2 class="section-title">Decline Reservation</h2>
             <!-- <p class="section-lead">
               We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
             </p> -->
@@ -61,7 +61,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Reservation Table</h4>
+                    <h4>Decline Reservation Table</h4>
                     <div class="card-header-action">
                       <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Laboratory</button> -->
                     </div>
@@ -75,6 +75,7 @@
                               #
                             </th>
                             <th>Patient</th>
+                            <th>Reference</th>
                             <th>Contact Number</th>
                             <th>Laboratory</th>
                             <th>Date</th>
@@ -85,10 +86,10 @@
                         <tbody>
                           <?php
                           // $id = $_SESSION['patient_id'];
-                            $query = mysqli_query($con, "SELECT reservation.id, laboratory.laboratory_name, reservation.tdate, laboratory.price, 
+                            $query = mysqli_query($con, "SELECT reservation.id, reservation.reference, laboratory.laboratory_name, reservation.tdate, laboratory.price, 
                             (SELECT CASE WHEN reservation.status = 0 THEN 'PENDING' WHEN reservation.status = 1 THEN 'APPROVED' ELSE 'CANCELLED' END) 
-                            AS reservation_status, reservation.status, patient.firstname, patient.lastname, patient.contact_number, reservation.doctor_id FROM reservation INNER JOIN laboratory ON laboratory.id=reservation.laboratory_id 
-                            INNER JOIN patient ON patient.id=reservation.patient_id WHERE reservation.add_to_checkout = 1 and reservation.mop = 1");
+                            AS reservation_status, reservation.status, patient.firstname, patient.lastname, patient.contact_number FROM reservation INNER JOIN laboratory ON laboratory.id=reservation.laboratory_id 
+                            INNER JOIN patient ON patient.id=reservation.patient_id WHERE reservation.add_to_checkout = 1 AND reservation.status = 2 and reservation.mop = 2");
                              $count = 0;
                             while($row = mysqli_fetch_array($query)){
                               $count += 1;
@@ -96,6 +97,7 @@
                           <tr>
                             <td><?php echo $count; ?></td>
                             <td><?php echo $row['firstname'].' '.$row['lastname']; ?></td>
+                            <td><?php echo $row['reference']; ?></td>
                             <td><?php echo $row['contact_number']; ?></td>
                             <td><?php echo $row['laboratory_name']; ?></td>
                             <td><?php echo $row['tdate']; ?></td>
@@ -112,7 +114,7 @@
                             </td>
                           </tr>
                           <?php
-                        include 'modal/approve_reservation.php';
+                        include 'modal/online-approve.php';
                         include 'modal/decline_reservation.php';
                         } ?>
                         </tbody>
@@ -160,25 +162,12 @@ if(isset($_POST['approve']))
 
     $id = $_POST['id'];
     $cashier_id = $_SESSION['cashier_id'];
-    $atp = $_POST['atp'];
-    $amount = $_POST['amount'];
-    $doctor_id = $_POST['doctor_id'];
-
-    if($amount >= $atp)
-    {
+   
         mysqli_query($con, "UPDATE reservation SET `status` = 1, `approve_by` = $cashier_id WHERE id = $id");
-
-        mysqli_query($con, "INSERT INTO transaction (`reservation_id`, `price`, `tdate`, `cashier_id`) VALUES ('$id', '$atp', '$tdate', '$cashier_id')");
-
-        $dFee = $atp * 0.5;
-        mysqli_query($con, "INSERT INTO doctor_fee (`doctor_id`, `reservation_id`, `amount`, `tdate`) VALUES ('$doctor_id', '$id', '$dFee', '$tdate')");
-
-        echo "<script>window.location.replace('rptreservation.php')</script>";
-    }
-    else
-    {
-        echo "<script>alert('Insuffient Amount!')</script>";
-    }
+        mysqli_query($con, "UPDATE transaction SET `status` = 1 WHERE reservation_id = $id");
+       
+        echo "<script>window.location.replace('online-payer.php')</script>";
+   
 
 }
 

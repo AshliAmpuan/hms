@@ -67,23 +67,59 @@
                               #
                             </th>
                             <th>Username</th>
+                            <th>Fullname</th>
                             <th>Role</th>
                             <th>Status</th>
                           </tr>
                         </thead>
                         <tbody>
+                          
                           <?php
-                            $query = mysqli_query($con, "SELECT username, (SELECT CASE WHEN role = 1 THEN 'Admin' WHEN role = 2 THEN 'Cashier' ELSE 'Patient' END) as roles, 
-                            (SELECT CASE WHEN active = 1 THEN 'active' ELSE 'Not Active' END) as status
-                             FROM users");
-                             $count = 0;
+                          $count = 0;
+                            $query = mysqli_query($con, "SELECT username, patient.firstname, patient.lastname, (SELECT CASE WHEN role = 1 THEN 'Admin' WHEN role = 2 THEN 'Cashier' ELSE 'Patient' END) as roles, 
+                            (SELECT CASE WHEN users.active = 1 THEN 'active' ELSE 'Not Active' END) as status
+                             FROM users INNER JOIN patient ON patient.user_id=users.id");
+                           
                             while($row = mysqli_fetch_array($query)){
                               $count += 1;
                           ?>
                           <tr>
                             <td><?php echo $count; ?></td>
                             <td><?php echo $row['username']; ?></td>
+                            <td><?php echo $row['firstname'].' '.$row['lastname']; ?></td>
                             <td><?php echo $row['roles']; ?></td>
+                            <td><?php echo $row['status']; ?></td>
+                          </tr>
+                          <?php } ?>
+                          <?php
+                            $query = mysqli_query($con, "SELECT username, doctor.fullname, (SELECT CASE WHEN role = 1 THEN 'Admin' WHEN role = 2 THEN 'Cashier' ELSE 'Patient' END) as roles, 
+                            (SELECT CASE WHEN users.active = 1 THEN 'active' ELSE 'Not Active' END) as status
+                             FROM users INNER JOIN doctor ON doctor.user_id=users.id");
+                           
+                            while($row = mysqli_fetch_array($query)){
+                              $count += 1;
+                          ?>
+                          <tr>
+                            <td><?php echo $count; ?></td>
+                            <td><?php echo $row['username']; ?></td>
+                            <td><?php echo $row['fullname']; ?></td>
+                            <td>Doctor</td>
+                            <td><?php echo $row['status']; ?></td>
+                          </tr>
+                          <?php } ?>
+                          <?php
+                            $query = mysqli_query($con, "SELECT username, cashier.fullname, (SELECT CASE WHEN role = 1 THEN 'Admin' WHEN role = 2 THEN 'Cashier' ELSE 'Patient' END) as roles, 
+                            (SELECT CASE WHEN users.active = 1 THEN 'active' ELSE 'Not Active' END) as status
+                             FROM users INNER JOIN cashier ON cashier.user_id=users.id");
+                           
+                            while($row = mysqli_fetch_array($query)){
+                              $count += 1;
+                          ?>
+                          <tr>
+                            <td><?php echo $count; ?></td>
+                            <td><?php echo $row['username']; ?></td>
+                            <td><?php echo $row['fullname']; ?></td>
+                            <td>Cashier</td>
                             <td><?php echo $row['status']; ?></td>
                           </tr>
                           <?php } ?>

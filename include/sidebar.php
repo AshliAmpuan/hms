@@ -50,6 +50,16 @@
                 <li><a class="nav-link" href="canceltransaction.php">Cancelled Transaction</a></li>
               </ul>
             </li>
+            <?php } else if($rowUser['role'] == 2) { ?>
+                <li class="dropdown">
+              <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-database"></i> <span>Transaction</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="online-payer.php">Online Payer Transaction</a></li>
+                <li><a class="nav-link" href="accept-online-payer.php">Accepted Transaction</a></li>
+                <li><a class="nav-link" href="decline-online-payer.php">Cancelled Transaction</a></li>
+                <li><a class="nav-link" href="rptreservation.php">Walk In Payment</a></li>
+              </ul>
+            </li>
             <?php } else { ?>
               <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-database"></i> <span>Transaction Reports</span></a>

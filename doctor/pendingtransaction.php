@@ -81,6 +81,7 @@
                               #
                             </th>
                             <th>Date</th>
+                            <th>Patient</th>
                             <th>Reference</th>
                             <th></th>
                           </tr>
@@ -88,8 +89,11 @@
                         <tbody>
                           <?php
                           $doctor_id = $_SESSION['doctor_id'];
-                            $query = mysqli_query($con, "SELECT reservation.reference, reservation.tdate FROM reservation  WHERE reservation.doctor_id = $doctor_id AND add_to_checkout = 1 AND status = 0
-                            GROUP BY reservation.reference, reservation.tdate");
+                          $clinic_id = $_SESSION['clinic_id'];
+                            $query = mysqli_query($con, "SELECT reservation.reference, patient.firstname, patient.lastname, reservation.tdate FROM reservation  
+                            INNER JOIN patient ON patient.id=reservation.patient_id
+                            WHERE reservation.doctor_id = $doctor_id AND add_to_checkout = 1 AND status = 0 AND reservation.clinic_id = $clinic_id
+                            GROUP BY reservation.reference, reservation.tdate, patient.firstname, patient.lastname");
                              $count = 0;
                             while($row = mysqli_fetch_array($query)){
                               $count += 1;
@@ -97,11 +101,12 @@
                           <tr>
                             <td><?php echo $count; ?></td>
                             <td><?php echo $row['tdate']; ?></td>
+                            <td><?php echo $row['firstname'].' '.$row['lastname']; ?></td>
                             <td><?php echo $row['reference']; ?></td>
                             <td>
                                 <a href="viewtransaction.php?reference=<?php echo $row['reference']; ?>" target="_blank" class="btn btn-primary btn-sm" ><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-success btn-sm" data-backdrop="static" data-toggle="modal" data-target="#exampleModal<?php echo $row['reference']; ?>"><i class="fa fa-check"></i></a> 
-                                <a href="#" class="btn btn-danger btn-sm" data-backdrop="static" data-toggle="modal" data-target="#exampleModaldecline<?php echo $row['reference']; ?>"><i class="fa fa-times"></i></a> </td>
+                                <!-- <a class="btn btn-success btn-sm" data-backdrop="static" data-toggle="modal" data-target="#exampleModal<?php echo $row['reference']; ?>"><i class="fa fa-check"></i></a> 
+                                <a href="#" class="btn btn-danger btn-sm" data-backdrop="static" data-toggle="modal" data-target="#exampleModaldecline<?php echo $row['reference']; ?>"><i class="fa fa-times"></i></a> </td> -->
                           </tr>
                           <?php
                         

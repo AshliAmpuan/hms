@@ -73,8 +73,9 @@
                         }
                     }
                     $reference = $_GET['reference'];
-                    echo "<script>window.location.replace('viewtransaction.php?reference=$reference&accepted=1')</script>";
                     echo "<script>alert('Upload Success')</script>";
+                    echo "<script>window.location.replace('viewtransaction.php?reference=$reference&accepted=1')</script>";
+                    
                 } else {
                     echo "No files uploaded.";
                 }

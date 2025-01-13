@@ -72,7 +72,8 @@
                               #
                             </th>
                             <th>Fullname</th>
-                            <th>Category</th>
+                            <th>Clinic</th>
+                            <th>Laboratory</th>
                             <th>Contact Number</th>
                             <th>Address</th>
                             <th>Status</th>
@@ -80,9 +81,10 @@
                         </thead>
                         <tbody>
                           <?php
-                            $query = mysqli_query($con, "SELECT *,
+                            $query = mysqli_query($con, "SELECT *, doctor.id, 
                             (SELECT CASE WHEN active = 1 THEN 'active' ELSE 'Not Active' END) as status
-                             FROM doctor");
+                            
+                             FROM doctor INNER JOIN clinic ON clinic.id=doctor.clinic_id ");
                              $count = 0;
                             while($row = mysqli_fetch_array($query)){
                               $count += 1;
@@ -91,6 +93,7 @@
                           <tr>
                             <td><?php echo $count; ?></td>
                             <td><?php echo $row['fullname']; ?></td>
+                            <td><?php echo $row['clinic_name']; ?></td>
                             <td>
                               <?php
                                 $category = mysqli_query($con, "SELECT * FROM doctor_laboratory INNER JOIN laboratory ON laboratory.id=doctor_laboratory.laboratory_id WHERE doctor_id = $doctor_id");
@@ -126,18 +129,32 @@
               <div class="modal-body">
                 <form method="POST">
                   <div class="row">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <label>Clinic</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-user"></i>
+                              </div>
+                            </div>
+                            <select name="clinic" class="form-control" id="clinic">
+                                <option value="#" ></option>
+                                <?php
+                                  $query = mysqli_query($con, "SELECT * FROM clinic");
+                                  while($row = mysqli_fetch_array($query)){
+                                ?>
+                                <option value="<?php echo $row['id']; ?>"><?php echo $row['clinic_name']; ?></option>
+                                <?php } ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
                     <div class="col-md-12">
                       <div class="form-group">
 												<label for="recipient-name" class="col-form-label">Laboratory</label><br>
-                        <select class="form-control h-100" multiple="multiple" name="laboratory[]">
-                              <!-- <option value="#" selected disabled>Choose..</option> -->
-                              <?php
-
-                                $query = mysqli_query($con, "SELECT * FROM laboratory");
-                                while($row = mysqli_fetch_array($query)){
-                              ?>
-                              <option value="<?php echo $row['id']; ?>"><?php echo $row['laboratory_name']; ?></option>
-                              <?php } ?>
+                        <select class="form-control h-100" multiple="multiple" id="laboratory" name="laboratory[]">
+                              
                       </select>
 											</div>
                       
@@ -224,6 +241,7 @@
           $contact_number = $_POST['contact_number'];
           $address = $_POST['address'];
           $laboratory = $_POST['laboratory'];
+          $clinic = $_POST['clinic'];
           $username = $_POST['username'];
           $password = md5($_POST['password']);
 
@@ -233,7 +251,7 @@
           $rowUser = mysqli_fetch_array($user_detail);
           $user_id = $rowUser['id'];
 
-          $doctor = mysqli_query($con, "INSERT INTO doctor (`fullname`, `address`, `contact_number`, `user_id`) VALUES ('$fullname', '$address', '$contact_number', '$user_id')");
+          $doctor = mysqli_query($con, "INSERT INTO doctor (`clinic_id`, `fullname`, `address`, `contact_number`, `user_id`) VALUES ('$clinic', '$fullname', '$address', '$contact_number', '$user_id')");
                 if($doctor)
                 {
                     
@@ -285,6 +303,21 @@
     $(document).ready(function() {
         $('#js-example-basic-single').select2();
     });
+  </script>
+  <script>
+    $('#clinic').on('change', function() {
+            var clinic = $('#clinic').val();
+        
+                  $.ajax({
+                     url: 'doctor_lab.php?clinic=' + clinic,
+                     type: 'get',
+                     success: function(response){
+                      $('#laboratory').empty();
+                      $("#laboratory").append(response);    
+
+                     }
+                   });
+          } );
   </script>
 </body>
 </html>

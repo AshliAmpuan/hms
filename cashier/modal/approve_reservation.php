@@ -10,6 +10,7 @@
               <div class="modal-body">
                   <form method="POST">
                     <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                    <input type="hidden" name="doctor_id" value="<?php echo $row['doctor_id']; ?>">
                     <input type="hidden" name="atp" value="<?php echo $row['price']; ?>">
                     <div class="col-lg-12">
                         <div class="form-group">

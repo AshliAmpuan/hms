@@ -69,6 +69,7 @@
                           <th>
                               #
                             </th>
+                            <th>Clinic</th>
                             <th>Category</th>
                             <th>Laboratory</th>
                             <th>Details</th>
@@ -80,13 +81,15 @@
                           <?php
                             $query = mysqli_query($con, "SELECT *,
                             (SELECT CASE WHEN laboratory.active = 1 THEN 'active' ELSE 'Not Active' END) as status
-                             FROM laboratory INNER JOIN category ON category.id=laboratory.category_id");
+                             FROM laboratory INNER JOIN category ON category.id=laboratory.category_id 
+                             INNER JOIN clinic ON clinic.id=laboratory.clinic_id");
                              $count = 0;
                             while($row = mysqli_fetch_array($query)){
                               $count += 1;
                           ?>
                           <tr>
                             <td><?php echo $count; ?></td>
+                            <td><?php echo $row['clinic_name']; ?></td>
                             <td><?php echo $row['category']; ?></td>
                             <td><?php echo $row['laboratory_name']; ?></td>
                             <td><?php echo $row['details']; ?></td>
@@ -116,6 +119,27 @@
               <div class="modal-body">
                 <form method="POST">
                   <div class="row">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <label>Clinic</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-user"></i>
+                              </div>
+                            </div>
+                            <select name="clinic" class="form-control" id="clinic">
+                                <option value="#" ></option>
+                                <?php
+                                  $query = mysqli_query($con, "SELECT * FROM clinic");
+                                  while($row = mysqli_fetch_array($query)){
+                                ?>
+                                <option value="<?php echo $row['id']; ?>"><?php echo $row['clinic_name']; ?></option>
+                                <?php } ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
                       <div class="col-lg-6">
                         <div class="form-group">
                           <label>Category</label>
@@ -125,16 +149,8 @@
                                 <i class="fas fa-user"></i>
                               </div>
                             </div>
-                            <select name="category" class="form-control" id="">
-                              <option value="#" selected disabled>Choose..</option>
-                              <?php
-
-                                $category = mysqli_query($con, "SELECT * FROM category WHERE active = 1");
-                                while($row = mysqli_fetch_array($category)){
+                            <select name="category" class="form-control" id="category">
                               
-                              ?>
-                                <option value="<?php echo $row['id']; ?>"><?php echo $row['category']; ?></option>
-                              <?php } ?>
                             </select>
                           </div>
                         </div>
@@ -205,12 +221,13 @@
       if(isset($_POST['submit']))
       {
           $laboratory = $_POST['laboratory'];
+          $clinic = $_POST['clinic'];
           $price = $_POST['price'];
           $category = $_POST['category'];
           $details = $_POST['details'];
           $capacity = $_POST['capacity'];
 
-          $laboratoryinsert = mysqli_query($con, "INSERT INTO laboratory (`category_id`, `laboratory_name`, `details`, `price`, `capacity_per_day`) VALUES ('$category', '$laboratory', '$details', '$price', '$capacity')");
+          $laboratoryinsert = mysqli_query($con, "INSERT INTO laboratory (`clinic_id`, `category_id`, `laboratory_name`, `details`, `price`, `capacity_per_day`) VALUES ('$clinic', '$category', '$laboratory', '$details', '$price', '$capacity')");
                 if($laboratoryinsert)
                 {
                     echo "<script>alert('Laboratory Add Successfully!')</script>";
@@ -245,5 +262,20 @@
   <!-- Template JS File -->
   <script src="../assets/js/scripts.js"></script>
   <script src="../assets/js/custom.js"></script>
+  <script>
+    $('#clinic').on('change', function() {
+            var clinic = $('#clinic').val();
+        
+                  $.ajax({
+                     url: 'categorydata.php?clinic=' + clinic,
+                     type: 'get',
+                     success: function(response){
+                      $('#category').empty();
+                      $("#category").append(response);    
+
+                     }
+                   });
+          } );
+  </script>
 </body>
 </html>

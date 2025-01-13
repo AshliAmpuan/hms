@@ -88,7 +88,9 @@
                         <tbody>
                           <?php
                           $doctor_id = $_SESSION['doctor_id'];
-                            $query = mysqli_query($con, "SELECT reservation.reference, reservation.tdate FROM reservation  WHERE reservation.doctor_id = $doctor_id AND add_to_checkout = 1 AND status = 2
+                          $clinic_id = $_SESSION['clinic_id'];
+                            $query = mysqli_query($con, "SELECT reservation.reference, reservation.tdate FROM reservation  
+                            WHERE reservation.doctor_id = $doctor_id AND add_to_checkout = 1 AND status = 2 AND reservation.clinic_id = $clinic_id
                             GROUP BY reservation.reference, reservation.tdate");
                              $count = 0;
                             while($row = mysqli_fetch_array($query)){

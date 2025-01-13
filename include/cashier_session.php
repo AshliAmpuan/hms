@@ -15,4 +15,3 @@
 
         header('location: ../index.php');
     }
-
