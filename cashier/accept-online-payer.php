@@ -48,22 +48,18 @@
             <h1></h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Entry</a></div>
-              <div class="breadcrumb-item">Approve Reservation</div>
+              <div class="breadcrumb-item">Approve Appointment</div>
             </div>
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">Approve Reservation</h2>
-            <!-- <p class="section-lead">
-              We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
-            </p> -->
+            <h2 class="section-title">Approve Appointment</h2>
             <div class="row">
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Approve Reservation Table</h4>
+                    <h4>Approve Appointment Table</h4>
                     <div class="card-header-action">
-                      <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Laboratory</button> -->
                     </div>
                   </div>
                   <div class="card-body">
@@ -77,7 +73,7 @@
                             <th>Patient</th>
                             <th>Reference</th>
                             <th>Contact Number</th>
-                            <th>Laboratory</th>
+                            <th>Service Type/Test</th>
                             <th>Date</th>
                             <th>Price</th>
                             <th>Status</th>

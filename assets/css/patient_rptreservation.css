@@ -1,0 +1,144 @@
+/* Custom styles for appointments page */
+
+/* Cancelled appointment rows */
+.cancelled-appointment {
+    opacity: 0.6;
+    background-color: #f8f9fa;
+}
+
+/* Veterinarian assignment styles */
+.vet-not-assigned {
+    color: #6c757d;
+    font-style: italic;
+}
+
+.vet-approved {
+    color: #28a745;
+}
+
+.vet-cancelled {
+    color: #6c757d;
+}
+
+.vet-unknown {
+    color: #6c757d;
+}
+
+/* Time display styles */
+.time-not-set {
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Category display styles */
+.category-label {
+    color: #6c757d;
+}
+
+/* Action buttons */
+.btn-view-files {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-view-files:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-cancel-booking {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-cancel-booking:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Status text for cancelled appointments */
+.text-cancelled {
+    color: #6c757d;
+}
+
+/* Table responsive adjustments */
+@media (max-width: 768px) {
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+    
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Badge customizations */
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+}
+
+/* Modal customizations */
+.modal-lg {
+    max-width: 900px;
+}
+
+.modal-header {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6;
+}
+
+/* Form input groups */
+.input-group-text {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+}
+
+/* Section header */
+.section-header {
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Card styling */
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+/* Breadcrumb styling */
+.breadcrumb-item.active {
+    color: #6c757d;
+}
+
+.breadcrumb-item a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}

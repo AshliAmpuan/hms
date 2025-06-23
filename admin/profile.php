@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="section-body">
-            <h2 class="section-title">Hi, <?php echo $_SESSION['fullname']; ?>!</h2>
+            <h2 class="section-title">Hi, <?php echo $_SESSION['username']; ?>!</h2>
             <p class="section-lead">
               Change information about yourself on this page.
             </p>
@@ -59,27 +59,13 @@
                 <div class="card profile-widget">
                   <div class="profile-widget-header">                     
                     <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle profile-widget-picture">
-                    <div class="profile-widget-items">
-                      <div class="profile-widget-item">
-                        <div class="profile-widget-item-label">Posts</div>
-                        <div class="profile-widget-item-value">187</div>
-                      </div>
-                      <div class="profile-widget-item">
-                        <div class="profile-widget-item-label">Followers</div>
-                        <div class="profile-widget-item-value">6,8K</div>
-                      </div>
-                      <div class="profile-widget-item">
-                        <div class="profile-widget-item-label">Following</div>
-                        <div class="profile-widget-item-value">2,1K</div>
-                      </div>
-                    </div>
                   </div>
                   <div class="profile-widget-description">
-                    <div class="profile-widget-name">Ujang Maman <div class="text-muted d-inline font-weight-normal"><div class="slash"></div> Web Developer</div></div>
-                    Ujang maman is a superhero name in <b>Indonesia</b>, especially in my family. He is not a fictional character but an original hero in my family, a hero for his children and for his wife. So, I use the name as a user in this template. Not a tribute, I'm just bored with <b>'John Doe'</b>.
+                    <div class="profile-widget-name">Clinic Administrator <div class="text-muted d-inline font-weight-normal"><div class="slash"></div> Veterinary Manager</div></div>
+                    As the administrator of Shepherd Animal Clinic, I oversee the daily operations, manage staff schedules, handle patient records, and ensure the highest quality of veterinary care for all our beloved animal patients. Our clinic is dedicated to providing compassionate and professional veterinary services to pets and their families in our community.
                   </div>
                   <div class="card-footer text-center">
-                    <div class="font-weight-bold mb-2">Follow Ujang On</div>
+                    <div class="font-weight-bold mb-2">Follow Shepherd Animal Clinic</div>
                     <a href="#" class="btn btn-social-icon btn-facebook mr-1">
                       <i class="fab fa-facebook-f"></i>
                     </a>
@@ -105,14 +91,14 @@
                         <div class="row">                               
                           <div class="form-group col-md-6 col-12">
                             <label>First Name</label>
-                            <input type="text" class="form-control" value="Ujang" required="">
+                            <input type="text" class="form-control" value="Clinic" required="">
                             <div class="invalid-feedback">
                               Please fill in the first name
                             </div>
                           </div>
                           <div class="form-group col-md-6 col-12">
                             <label>Last Name</label>
-                            <input type="text" class="form-control" value="Maman" required="">
+                            <input type="text" class="form-control" value="Administrator" required="">
                             <div class="invalid-feedback">
                               Please fill in the last name
                             </div>
@@ -121,31 +107,14 @@
                         <div class="row">
                           <div class="form-group col-md-7 col-12">
                             <label>Email</label>
-                            <input type="email" class="form-control" value="ujang@maman.com" required="">
+                            <input type="email" class="form-control" value="shepherdanimalclinicpaco@gmail.com" required="">
                             <div class="invalid-feedback">
                               Please fill in the email
                             </div>
                           </div>
                           <div class="form-group col-md-5 col-12">
                             <label>Phone</label>
-                            <input type="tel" class="form-control" value="">
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-group col-12">
-                            <label>Bio</label>
-                            <textarea class="form-control summernote-simple">Ujang maman is a superhero name in <b>Indonesia</b>, especially in my family. He is not a fictional character but an original hero in my family, a hero for his children and for his wife. So, I use the name as a user in this template. Not a tribute, I'm just bored with <b>'John Doe'</b>.</textarea>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="form-group mb-0 col-12">
-                            <div class="custom-control custom-checkbox">
-                              <input type="checkbox" name="remember" class="custom-control-input" id="newsletter">
-                              <label class="custom-control-label" for="newsletter">Subscribe to newsletter</label>
-                              <div class="text-muted form-text">
-                                You will get new information about products, offers and promotions
-                              </div>
-                            </div>
+                            <input type="tel" class="form-control" value="09202303628">
                           </div>
                         </div>
                     </div>

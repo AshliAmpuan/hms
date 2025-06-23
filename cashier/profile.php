@@ -81,7 +81,7 @@
                     </div> -->
                   </div>
                   <div class="profile-widget-description">
-                    <div class="profile-widget-name"><?php echo $row['fullname']; ?> <div class="text-muted d-inline font-weight-normal"><div class="slash"></div> Doctor</div></div>
+                    <div class="profile-widget-name"><?php echo $row['fullname']; ?> <div class="text-muted d-inline font-weight-normal"><div class="slash"></div> Veterinarian/div></div>
                     <?php echo $row['bio']; ?>
                   </div>
                   <!-- <div class="card-footer text-center">

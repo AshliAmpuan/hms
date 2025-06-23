@@ -124,7 +124,7 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Add Doctor</h5>
+                <h5 class="modal-title">Add Veterinarian</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -134,7 +134,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-												<label for="recipient-name" class="col-form-label">Laboratory</label><br>
+												<label for="recipient-name" class="col-form-label">Service Type/Test</label><br>
                         <select class="form-control h-100" multiple="multiple" name="laboratory[]">
                               <!-- <option value="#" selected disabled>Choose..</option> -->
                               <?php
@@ -253,7 +253,7 @@
                     }
 
                     
-                    echo "<script>alert('Doctor Add Successfully!')</script>";
+                    echo "<script>alert('Veterinarian Add Successfully!')</script>";
                     echo "<script>location.replace('doctor.php')</script>";
                 }
                 else

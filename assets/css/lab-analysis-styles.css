@@ -1,0 +1,421 @@
+/* Lab Analysis Custom Styles */
+
+/* File Upload Area */
+.file-upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    padding: 40px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: #f8f9fa;
+    position: relative;
+}
+
+.file-upload-area:hover {
+    border-color: #007bff;
+    background: #f0f8ff;
+}
+
+.file-upload-area.drag-over {
+    border-color: #28a745;
+    background: #f0fff4;
+    transform: scale(1.02);
+}
+
+.file-upload-area.file-selected {
+    border-color: #28a745;
+    background: #f0fff4;
+}
+
+.file-info {
+    display: none;
+    background: white;
+    border: 1px solid #28a745;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+/* Image Preview - FORCE LARGE SIZE */
+.image-preview,
+#imagePreview {
+    max-width: 900% !important;
+    max-height: 800px !important;
+    min-height: 500px !important;
+    width: auto !important;
+    height: auto !important;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    object-fit: contain !important;
+    background: white;
+    padding: 10px;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+/* OCR Progress */
+.ocr-progress {
+    width: 100%;
+    height: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+}
+
+.ocr-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    transition: width 0.3s ease;
+    border-radius: 10px;
+    position: relative;
+}
+
+.ocr-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Analysis Results */
+.analysis-results {
+    display: none;
+    margin-top: 30px;
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pet-info-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 0;
+}
+
+.pet-info-header h4 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.pet-info-header p {
+    margin: 5px 0 0 0;
+    opacity: 0.9;
+    font-size: 0.95rem;
+}
+
+.analysis-card {
+    background: white;
+    border: 1px solid #e9ecef;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.analysis-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+.analysis-card:last-child {
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 0;
+}
+
+.analysis-card h5 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f8f9fa;
+}
+
+.analysis-card h5 i {
+    color: #007bff;
+    margin-right: 8px;
+}
+
+.analysis-card ul {
+    padding-left: 20px;
+}
+
+.analysis-card ul li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.analysis-card ul li strong {
+    color: #2c3e50;
+}
+
+/* Status Messages */
+.text-success i {
+    margin-right: 5px;
+}
+
+.text-danger i {
+    margin-right: 5px;
+}
+
+.text-warning i {
+    margin-right: 5px;
+}
+
+.text-info i {
+    margin-right: 5px;
+}
+
+.text-primary i {
+    margin-right: 5px;
+}
+
+/* Form Enhancements */
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0056b3, #004085);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    border: none;
+}
+
+.btn-info:hover {
+    background: linear-gradient(135deg, #138496, #0f6674);
+}
+
+/* Card Improvements */
+.card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-bottom: 1px solid #dee2e6;
+    font-weight: 600;
+}
+
+/* FIXED: Textarea Enhancements - PROPER HEIGHT FOR EXTRACTED TEXT */
+#extractedText,
+textarea[placeholder*="Extracted text will appear here"],
+textarea[placeholder*="extracted text"],
+.extracted-text,
+.ocr-text,
+textarea[name*="extracted"],
+textarea[id*="extracted"] {
+    font-family: 'Courier New', monospace !important;
+    background: #f8f9fa !important;
+    border: 1px solid #ced4da !important;
+    resize: vertical !important;
+    min-height: 400px !important;
+    height: auto !important;
+    max-height: none !important;
+    line-height: 1.4 !important;
+    padding: 15px !important;
+    font-size: 14px !important;
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    overflow: hidden !important;
+}
+
+/* Additional specific selectors for the extracted text area */
+textarea.form-control {
+    min-height: 400px !important;
+    height: auto !important;
+    overflow: hidden !important;
+}
+
+/* Focus state for extracted text */
+#extractedText:focus,
+textarea[placeholder*="Extracted text will appear here"]:focus,
+textarea[placeholder*="extracted text"]:focus {
+    background: white !important;
+    border-color: #007bff !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+}
+
+/* Loading States */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.fa-spin {
+    animation: fa-spin 2s infinite linear;
+}
+
+@keyframes fa-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .file-upload-area {
+        padding: 30px 15px;
+    }
+    
+    .analysis-card {
+        padding: 20px 15px;
+    }
+    
+    .pet-info-header {
+        padding: 15px;
+    }
+    
+    .pet-info-header h4 {
+        font-size: 1.25rem;
+    }
+    
+    /* Force larger image preview for mobile */
+    .image-preview,
+    #imagePreview {
+        max-height: 500px !important;
+        min-height: 300px !important;
+        padding: 5px !important;
+    }
+    
+    /* Maintain extract text height on mobile */
+    #extractedText,
+    textarea[placeholder*="Extracted text will appear here"],
+    textarea[placeholder*="extracted text"],
+    textarea.form-control {
+        min-height: 350px !important;
+        height: auto !important;
+        overflow: hidden !important;
+        font-size: 13px !important;
+        padding: 12px !important;
+    }
+}
+
+/* Large screens - FORCE MAXIMUM SIZE */
+@media (min-width: 1200px) {
+    .image-preview,
+    #imagePreview {
+        max-height: 1000px !important;
+        min-height: 600px !important;
+    }
+    
+    /* Ensure extract text box is even larger on big screens */
+    #extractedText,
+    textarea[placeholder*="Extracted text will appear here"],
+    textarea[placeholder*="extracted text"],
+    textarea.form-control {
+        min-height: 500px !important;
+        height: auto !important;
+        overflow: hidden !important;
+        font-size: 15px !important;
+        padding: 20px !important;
+        line-height: 1.5 !important;
+    }
+}
+
+/* Medium screens optimization */
+@media (min-width: 768px) and (max-width: 1199px) {
+    #extractedText,
+    textarea[placeholder*="Extracted text will appear here"],
+    textarea[placeholder*="extracted text"],
+    textarea.form-control {
+        min-height: 450px !important;
+        height: auto !important;
+        overflow: hidden !important;
+        font-size: 14px !important;
+        padding: 16px !important;
+    }
+}
+
+/* Alert Enhancements */
+.alert {
+    border: none;
+    border-left: 4px solid;
+    border-radius: 8px;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    border-left-color: #28a745;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    border-left-color: #dc3545;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    border-left-color: #ffc107;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+    border-left-color: #17a2b8;
+}
+
+/* Additional fallback for any textarea in the form */
+form textarea,
+.form-group textarea,
+div textarea {
+    min-height: 400px !important;
+    overflow: hidden !important;
+}
+
+/* Ensure proper spacing around the textarea */
+.form-group {
+    margin-bottom: 25px;
+}
+
+/* Style for the textarea container */
+.form-group > label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    display: block;
+}

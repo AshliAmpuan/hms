@@ -133,7 +133,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-												<label for="recipient-name" class="col-form-label">Laboratory</label><br>
+												<label for="recipient-name" class="col-form-label">Service Type/Test</label><br>
                         <select class="form-control h-100" multiple="multiple" name="laboratory[]">
                               <!-- <option value="#" selected disabled>Choose..</option> -->
                               <?php
@@ -252,7 +252,7 @@
                     }
 
                     
-                    echo "<script>alert('Doctor Add Successfully!')</script>";
+                    echo "<script>alert('Veterinarian Add Successfully!')</script>";
                     echo "<script>location.replace('doctor.php')</script>";
                 }
                 else

@@ -1,0 +1,88 @@
+/* Order History Page Specific Styles */
+
+/* Order status badge customizations */
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+}
+
+.badge-info {
+    background-color: #17a2b8;
+}
+
+.badge-secondary {
+    background-color: #6c757d;
+}
+
+/* Table enhancements */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
+}
+
+/* Order details modal customizations */
+#orderDetailsModal .modal-dialog {
+    max-width: 90%;
+}
+
+#orderDetailsModal .modal-content {
+    border-radius: 8px;
+}
+
+/* Button customizations */
+.btn-sm {
+    margin-right: 5px;
+    margin-bottom: 2px;
+}
+
+/* Card header styling */
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Responsive table improvements */
+@media (max-width: 768px) {
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+    
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    #orderDetailsModal .modal-dialog {
+        max-width: 95%;
+        margin: 10px auto;
+    }
+}
+
+/* Badge spacing */
+.badge {
+    margin-right: 2px;
+}
+
+/* Action buttons container */
+.table td:last-child {
+    white-space: nowrap;
+}
+
+/* Loading state for modal */
+.modal-body.loading {
+    text-align: center;
+    padding: 40px;
+}
+
+.modal-body.loading::after {
+    content: "Loading...";
+    display: block;
+    color: #6c757d;
+}

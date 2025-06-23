@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Klinik - Clinic Website Template</title>
+    <title>Shepherd Animal Clinic</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -48,17 +48,17 @@
             <div class="col-lg-7 px-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-map-marker-alt text-primary me-2"></small>
-                    <small>123 Street, New York, USA</small>
+                    <small>1427 Pedro Gil St. Corner Peñafrancia, Paco, Philippines</small>
                 </div>
-                <div class="h-100 d-inline-flex align-items-center py-3">
-                    <small class="far fa-clock text-primary me-2"></small>
-                    <small>Mon - Fri : 09.00 AM - 09.00 PM</small>
+                <div class="h-100 d-inline-flex align-items-center py-2 me-4"> <!-- Reduced padding from py-3 to py-2 -->
+                    <small class="far fa-clock text-success me-2" style="font-size: 1.2rem;"></small> <!-- Increased icon size -->
+                    <small>Open Daily: 12:00 PM - 08:00 PM</small>
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">
-                <div class="h-100 d-inline-flex align-items-center py-3 me-4">
+                  <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-phone-alt text-primary me-2"></small>
-                    <small>+012 345 6789</small>
+                    <small>(02) 9066 662 </small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center">
                     <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -83,9 +83,11 @@
             <h1 class="display-3 text-white mb-3 animated slideInDown">About Us</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb text-uppercase mb-0">
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                    <li class="breadcrumb-item text-primary active" aria-current="page">About</li>
+                      <!--
+                    <li class="breadcrumb-item"><a class="text-white" href="#"> </a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#"> </a></li>
+                    <li class="breadcrumb-item text-primary active" aria-current="page"></li>
+                    -->
                 </ol>
             </nav>
         </div>
@@ -98,19 +100,16 @@
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="d-flex flex-column">
-                        <img class="img-fluid rounded w-75 align-self-end" src="img/about-1.jpg" alt="">
-                        <img class="img-fluid rounded w-50 bg-white pt-3 pe-3" src="img/about-2.jpg" alt="" style="margin-top: -25%;">
-                    </div>
+                    <img class="img-fluid rounded w-100" src="img/clinic image.jpg" alt="">
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <p class="d-inline-block border rounded-pill py-1 px-4">About Us</p>
-                    <h1 class="mb-4">Why You Should Trust Us? Get Know About Us!</h1>
-                    <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                    <p class="mb-4">Stet no et lorem dolor et diam, amet duo ut dolore vero eos. No stet est diam rebum amet diam ipsum. Clita clita labore, dolor duo nonumy clita sit at, sed sit sanctus dolor eos.</p>
-                    <p><i class="far fa-check-circle text-primary me-3"></i>Quality health care</p>
-                    <p><i class="far fa-check-circle text-primary me-3"></i>Only Qualified Doctors</p>
-                    <p><i class="far fa-check-circle text-primary me-3"></i>Medical Research Professionals</p>
+                    <h1 class="mb-4">Welcome to Shepherd Animal Clinic</h1>
+                    <p>At Shepherd Animal Clinic, we are dedicated to providing exceptional veterinary care for your beloved pets. Located in the heart of Manila, our clinic has been serving the community with compassion and expertise for years.</p>
+                    <p class="mb-4">Under the supervision of Dr. Israel Vargas, our experienced team is committed to ensuring the health and well-being of every animal that walks through our doors. We combine modern veterinary techniques with genuine care to deliver the best possible outcomes for our patients.</p>
+                    <p><i class="far fa-check-circle text-primary me-3"></i>Comprehensive veterinary services</p>
+                    <p><i class="far fa-check-circle text-primary me-3"></i>Board-certified veterinarians</p>
+                    <p><i class="far fa-check-circle text-primary me-3"></i>State-of-the-art medical equipment</p>
                     <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="">Read More</a>
                 </div>
             </div>
@@ -136,7 +135,7 @@
                                     </div>
                                     <div class="ms-4">
                                         <p class="text-white mb-2">Experience</p>
-                                        <h5 class="text-white mb-0">Doctors</h5>
+                                        <h5 class="text-white mb-0">Veterinarians</h5>
                                     </div>
                                 </div>
                             </div>
@@ -178,7 +177,7 @@
                 </div>
                 <div class="col-lg-6 pe-lg-0 wow fadeIn" data-wow-delay="0.5s" style="min-height: 400px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute img-fluid w-100 h-100" src="img/feature.jpg" style="object-fit: cover;" alt="">
+                        <img class="position-absolute img-fluid w-100 h-100" src="img/feature-cat.jpg" style="object-fit: cover;" alt="">
                     </div>
                 </div>
             </div>
@@ -191,8 +190,8 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <p class="d-inline-block border rounded-pill py-1 px-4">Doctors</p>
-                <h1>Our Experience Doctors</h1>
+                <p class="d-inline-block border rounded-pill py-1 px-4">Veterinarians</p>
+                <h1>Our Experience Veterinarians</h1>
             </div>
             <div class="row g-4">
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -201,7 +200,7 @@
                             <img class="img-fluid" src="img/team-1.jpg" alt="">
                         </div>
                         <div class="team-text bg-light text-center p-4">
-                            <h5>Doctor Name</h5>
+                            <h5>Veterinarian Name</h5>
                             <p class="text-primary">Department</p>
                             <div class="team-social text-center">
                                 <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
@@ -217,7 +216,7 @@
                             <img class="img-fluid" src="img/team-2.jpg" alt="">
                         </div>
                         <div class="team-text bg-light text-center p-4">
-                            <h5>Doctor Name</h5>
+                            <h5>Veterinarian Name</h5>
                             <p class="text-primary">Department</p>
                             <div class="team-social text-center">
                                 <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
@@ -233,7 +232,7 @@
                             <img class="img-fluid" src="img/team-3.jpg" alt="">
                         </div>
                         <div class="team-text bg-light text-center p-4">
-                            <h5>Doctor Name</h5>
+                            <h5>Veterinarian Name</h5>
                             <p class="text-primary">Department</p>
                             <div class="team-social text-center">
                                 <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
@@ -249,7 +248,7 @@
                             <img class="img-fluid" src="img/team-4.jpg" alt="">
                         </div>
                         <div class="team-text bg-light text-center p-4">
-                            <h5>Doctor Name</h5>
+                            <h5>Veterinarian Name</h5>
                             <p class="text-primary">Department</p>
                             <div class="team-social text-center">
                                 <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>

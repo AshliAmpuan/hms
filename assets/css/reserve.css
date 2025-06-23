@@ -1,0 +1,48 @@
+/* Custom styles for reservation page */
+.fc-title {
+    color: white;
+}
+
+/* PayPal button container styling */
+.paypal {
+    margin-top: 15px;
+}
+
+/* Modal styling improvements */
+.modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 1rem);
+}
+
+/* Form improvements */
+.form-text a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.form-text a:hover {
+    text-decoration: underline;
+}
+
+/* Table responsive improvements */
+.table-responsive {
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+}
+
+/* Button spacing */
+.btn + .btn {
+    margin-left: 0.5rem;
+}
+
+/* Card header action alignment */
+.card-header-action {
+    display: flex;
+    align-items: center;
+}
+
+/* PayPal button container hidden by default */
+#paypal-button-container {
+    display: none;
+}

@@ -116,7 +116,7 @@
                                 <i class="fas fa-user"></i>
                               </div>
                             </div>
-                            <input type="text" class="form-control" placeholder="Clinic" name="clinic">
+                            <input type="text" class="form-control" placeholder="Room" name="room">
                           </div>
                         </div>
                       </div>
@@ -143,7 +143,7 @@
           $categoryinsert = mysqli_query($con, "INSERT INTO clinic (`clinic_name`) VALUES ('$clinic')");
                 if($categoryinsert)
                 {
-                    echo "<script>alert('Category Add Successfully!')</script>";
+                    echo "<script>alert('Service Add Successfully!')</script>";
                     echo "<script>location.replace('clinic.php')</script>";
                 }
                 else

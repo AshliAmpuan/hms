@@ -1,4 +1,4 @@
-<option value="#" selected disabled>Choosee..</option>
+<option value="#" selected disabled>Choose..</option>
 <?php
 
     include('../include/connection.php');

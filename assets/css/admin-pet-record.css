@@ -1,0 +1,13 @@
+/* Custom style for disabled Add Record button */
+#addRecordBtn:disabled {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+  color: #fff !important;
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+#addRecordBtn:disabled:hover {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+}

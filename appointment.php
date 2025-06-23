@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Klinik - Clinic Website Template</title>
+    <title>Shepherd Animal Clinic</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -48,17 +48,17 @@
             <div class="col-lg-7 px-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-map-marker-alt text-primary me-2"></small>
-                    <small>123 Street, New York, USA</small>
+                    <small>1427 Pedro Gil St. Corner Peñafrancia, Paco, Philippines</small>
                 </div>
-                <div class="h-100 d-inline-flex align-items-center py-3">
-                    <small class="far fa-clock text-primary me-2"></small>
-                    <small>Mon - Fri : 09.00 AM - 09.00 PM</small>
+                <div class="h-100 d-inline-flex align-items-center py-2 me-4"> <!-- Reduced padding from py-3 to py-2 -->
+                    <small class="far fa-clock text-success me-2" style="font-size: 1.2rem;"></small> <!-- Increased icon size -->
+                    <small>Open Daily: 12:00 PM - 08:00 PM</small>
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">
-                <div class="h-100 d-inline-flex align-items-center py-3 me-4">
+                  <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-phone-alt text-primary me-2"></small>
-                    <small>+012 345 6789</small>
+                    <small>(02) 9066 662 </small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center">
                     <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -83,9 +83,11 @@
             <h1 class="display-3 text-white mb-3 animated slideInDown">Appointment</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb text-uppercase mb-0">
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                    <li class="breadcrumb-item text-primary active" aria-current="page">Appointment</li>
+                    <!--
+                    <li class="breadcrumb-item"><a class="text-white" href="#"> </a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#"> </a></li>
+                    <li class="breadcrumb-item text-primary active" aria-current="page"></li>
+                    -->
                 </ol>
             </nav>
         </div>
@@ -99,7 +101,7 @@
             <div class="row g-5">
                 <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
                     <p class="d-inline-block border rounded-pill py-1 px-4">Appointment</p>
-                    <h1 class="mb-4">Make An Appointment To Visit Our Doctor</h1>
+                    <h1 class="mb-4">Make An Appointment To Visit Our Veterinarian</h1>
                     <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
                     <div class="bg-light rounded d-flex align-items-center p-5 mb-4">
                         <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-white" style="width: 55px; height: 55px;">

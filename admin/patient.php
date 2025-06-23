@@ -1,145 +1,106 @@
 <?php include('../include/admin_session.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <?php include('../include/title.php'); ?>
-    <meta
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-      name="viewport"
-    />
-    <link
-      rel="icon"
-      href="../assets/img/kaiadmin/favicon.ico"
-      type="image/x-icon"
-    />
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <?php include('../include/title.php'); ?>
 
-    <!-- Fonts and icons -->
-    <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
-    <script>
-      WebFont.load({
-        google: { families: ["Public Sans:300,400,500,600,700"] },
-        custom: {
-          families: [
-            "Font Awesome 5 Solid",
-            "Font Awesome 5 Regular",
-            "Font Awesome 5 Brands",
-            "simple-line-icons",
-          ],
-          urls: ["../assets/css/fonts.min.css"],
-        },
-        active: function () {
-          sessionStorage.fonts = true;
-        },
-      });
-    </script>
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
 
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/css/plugins.min.css" />
-    <link rel="stylesheet" href="../assets/css/kaiadmin.min.css" />
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="../assets/modules/datatables/datatables.min.css">
+  <link rel="stylesheet" href="../assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
 
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="../assets/css/demo.css" />
-  </head>
-  <body>
-    <div class="wrapper">
-      <!-- Sidebar -->
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/patientlist.css">
+  
+  <!-- Start GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-94034622-3');
+  </script>
+  <!-- /END GA -->
+</head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <?php include('../include/header.php'); ?>
       <?php include('../include/sidebar.php'); ?>
-      <!-- End Sidebar -->
 
-      <div class="main-panel">
-        <div class="main-header">
-          <div class="main-header-logo">
-            <!-- Logo Header -->
-            <div class="logo-header" data-background-color="dark">
-              <a href="../index.html" class="logo">
-                <img
-                  src="../assets/img/kaiadmin/logo_light.svg"
-                  alt="navbar brand"
-                  class="navbar-brand"
-                  height="20"
-                />
-              </a>
-              <div class="nav-toggle">
-                <button class="btn btn-toggle toggle-sidebar">
-                  <i class="gg-menu-right"></i>
-                </button>
-                <button class="btn btn-toggle sidenav-toggler">
-                  <i class="gg-menu-left"></i>
-                </button>
-              </div>
-              <button class="topbar-toggler more">
-                <i class="gg-more-vertical-alt"></i>
-              </button>
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active"><a href="#">Entry</a></div>
+              <div class="breadcrumb-item">Patients Management</div>
             </div>
-            <!-- End Logo Header -->
           </div>
-          <!-- Navbar Header -->
-          <?php include('../include/header.php'); ?>
-          <!-- End Navbar -->
-        </div>
 
-        <div class="container">
-          <div class="page-inner">
-            <div class="page-header">
-              <h3 class="fw-bold mb-3">Patient</h3>
-              <ul class="breadcrumbs mb-3">
-                <li class="nav-home">
-                  <a href="#">
-                    <i class="icon-home"></i>
-                  </a>
-                </li>
-                <li class="separator">
-                  <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                  <a href="#">Users</a>
-                </li>
-                <li class="separator">
-                  <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                  <a href="#">Patient Management</a>
-                </li>
-              </ul>
-            </div>
+          <div class="section-body">
+            <h2 class="section-title">Patients Management</h2>
             <div class="row">
-            <div class="col-md-12">
+              <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4 class="card-title">Patient Management</h4>
+                    <h4>Patients Table</h4>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table
-                        id="multi-filter-select"
-                        class="display table table-striped table-hover"
-                      >
+                      <table class="table table-striped" id="table-1">
                         <thead>
                           <tr>
+                            <th>#</th>
                             <th>Username</th>
                             <th>Fullname</th>
-                            <th>Email</th>
-                            <th>Contact Number</th>
-                            <th>Address</th>
                             <th>Role</th>
+                            <th>View Pet</th>
                             <th>Status</th>
                           </tr>
                         </thead>
-                        <tfoot>
-                          <tr>
-                            <th>Username</th>
-                            <th>Fullname</th>
-                            <th>Email</th>
-                            <th>Contact Number</th>
-                            <th>Address</th>
-                            <th>Role</th>
-                            <th>Status</th>
-                          </tr>
-                        </tfoot>
                         <tbody>
+                          <?php
+                          $count = 0;
+                          // Assuming role=3 corresponds to Patient. Adjust if this differs.
+                          $query = mysqli_query($con, "
+                            SELECT users.username, patient.firstname, patient.lastname, users.active, patient.id AS patient_id
+                            FROM users
+                            INNER JOIN patient ON patient.user_id = users.id
+                            WHERE users.role = 3
+                          ");
                           
+                          while($row = mysqli_fetch_array($query)){
+                            $count++;
+                            $status = ($row['active'] == 1) ? 'Active' : 'Not Active';
+                          ?>
+                          <tr>
+                            <td><?php echo $count; ?></td>
+                            <td><?php echo htmlspecialchars($row['username']); ?></td>
+                            <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?></td>
+                            <td>Patient</td>
+                            <td>
+                              <button class="btn btn-primary btn-sm" onclick="viewPets(<?php echo $row['patient_id']; ?>, '<?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?>')">
+                                <i class="fas fa-eye"></i> View Pets
+                              </button>
+                            </td>
+                            <td>
+                              <span class="badge badge-<?php echo ($row['active'] == 1) ? 'success' : 'danger'; ?>">
+                                <?php echo $status; ?>
+                              </span>
+                            </td>
+                          </tr>
+                          <?php } ?>
                         </tbody>
                       </table>
                     </div>
@@ -148,84 +109,62 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <?php include('../include/footer.php'); ?>
+        </section>
       </div>
-
-      <!-- Custom template | don't include it in your project! -->
-      
-      <!-- End Custom template -->
+      <?php include('../include/footer.php'); ?>
     </div>
-    <!--   Core JS Files   -->
-    <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
+  </div>
 
-    <!-- jQuery Scrollbar -->
-    <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-    <!-- Datatables -->
-    <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
-    <!-- Kaiadmin JS -->
-    <script src="../assets/js/kaiadmin.min.js"></script>
-    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <script src="../assets/js/setting-demo2.js"></script>
-    <script>
-      $(document).ready(function () {
-        $("#basic-datatables").DataTable({});
+  <!-- Pet Modal -->
+  <div class="modal fade" id="petModal" tabindex="-1" role="dialog" aria-labelledby="petModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="petModalLabel">
+            <i class="fas fa-paw"></i> Pet Information
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="petModalBody">
+          <div class="text-center">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <p class="mt-2">Loading pet information...</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        $("#multi-filter-select").DataTable({
-          pageLength: 5,
-          initComplete: function () {
-            this.api()
-              .columns()
-              .every(function () {
-                var column = this;
-                var select = $(
-                  '<select class="form-select"><option value=""></option></select>'
-                )
-                  .appendTo($(column.footer()).empty())
-                  .on("change", function () {
-                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+  <!-- General JS Scripts -->
+  <script src="../assets/modules/jquery.min.js"></script>
+  <script src="../assets/modules/popper.js"></script>
+  <script src="../assets/modules/tooltip.js"></script>
+  <script src="../assets/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="../assets/modules/moment.min.js"></script>
+  <script src="../assets/js/stisla.js"></script>
+  
+  <!-- JS Libraries -->
+  <script src="../assets/modules/datatables/datatables.min.js"></script>
+  <script src="../assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+  <script src="../assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
+  <script src="../assets/modules/jquery-ui/jquery-ui.min.js"></script>
 
-                    column
-                      .search(val ? "^" + val + "$" : "", true, false)
-                      .draw();
-                  });
+  <!-- Page Specific JS File -->
+  <script src="../assets/js/page/modules-datatables.js"></script>
+  
+  <!-- Template JS File -->
+  <script src="../assets/js/scripts.js"></script>
+  <script src="../assets/js/custom.js"></script>
+  <script src="../assets/js/patientlist.js"></script>
 
-                column
-                  .data()
-                  .unique()
-                  .sort()
-                  .each(function (d, j) {
-                    select.append(
-                      '<option value="' + d + '">' + d + "</option>"
-                    );
-                  });
-              });
-          },
-        });
-
-        // Add Row
-        $("#add-row").DataTable({
-          pageLength: 5,
-        });
-
-        var action =
-          '<td> <div class="form-button-action"> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
-
-        $("#addRowButton").click(function () {
-          $("#add-row")
-            .dataTable()
-            .fnAddData([
-              $("#addName").val(),
-              $("#addPosition").val(),
-              $("#addOffice").val(),
-              action,
-            ]);
-          $("#addRowModal").modal("hide");
-        });
-      });
-    </script>
-  </body>
+  
+</body>
 </html>

@@ -27,7 +27,6 @@
 
   gtag('config', 'UA-94034622-3');
 </script>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 <!-- /END GA --></head>
 
@@ -45,12 +44,12 @@
             <h1></h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Entry</a></div>
-              <div class="breadcrumb-item">Doctor Management</div>
+              <div class="breadcrumb-item">Veterinarian Management</div>
             </div>
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">Doctor Management</h2>
+            <h2 class="section-title">Veterinarian Management</h2>
             <!-- <p class="section-lead">
               We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
             </p> -->
@@ -58,9 +57,9 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Doctor Table</h4>
+                    <h4>Veterinarian Table</h4>
                     <div class="card-header-action">
-                      <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Doctor</button>
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Veterinarian</button>
                     </div>
                   </div>
                   <div class="card-body">
@@ -72,8 +71,6 @@
                               #
                             </th>
                             <th>Fullname</th>
-                            <th>Clinic</th>
-                            <th>Laboratory</th>
                             <th>Contact Number</th>
                             <th>Address</th>
                             <th>Status</th>
@@ -93,15 +90,6 @@
                           <tr>
                             <td><?php echo $count; ?></td>
                             <td><?php echo $row['fullname']; ?></td>
-                            <td><?php echo $row['clinic_name']; ?></td>
-                            <td>
-                              <?php
-                                $category = mysqli_query($con, "SELECT * FROM doctor_laboratory INNER JOIN laboratory ON laboratory.id=doctor_laboratory.laboratory_id WHERE doctor_id = $doctor_id");
-                                while($row_category = mysqli_fetch_array($category)){
-                              ?>
-                              <div class="badge badge-success"><?php echo $row_category['laboratory_name']; ?></div>
-                            <?php } ?>
-                            </td>
                             <td><?php echo $row['contact_number']; ?></td>
                             <td><?php echo $row['address']; ?></td>
                             <td><?php echo $row['status']; ?></td>
@@ -121,7 +109,7 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Add Doctor</h5>
+                <h5 class="modal-title">Add Veterinarian</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -150,15 +138,6 @@
                           </div>
                         </div>
                       </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-												<label for="recipient-name" class="col-form-label">Laboratory</label><br>
-                        <select class="form-control h-100" multiple="multiple" id="laboratory" name="laboratory[]">
-                              
-                      </select>
-											</div>
-                      
-                    </div>  
                     <div class="col-lg-6">
                         <div class="form-group">
                           <label>Username</label>
@@ -240,7 +219,6 @@
           $fullname = $_POST['fullname'];
           $contact_number = $_POST['contact_number'];
           $address = $_POST['address'];
-          $laboratory = $_POST['laboratory'];
           $clinic = $_POST['clinic'];
           $username = $_POST['username'];
           $password = md5($_POST['password']);
@@ -254,18 +232,7 @@
           $doctor = mysqli_query($con, "INSERT INTO doctor (`clinic_id`, `fullname`, `address`, `contact_number`, `user_id`) VALUES ('$clinic', '$fullname', '$address', '$contact_number', '$user_id')");
                 if($doctor)
                 {
-                    
-
-                    $last_insert_id = mysqli_query($con, "SELECT id FROM doctor WHERE user_id = $user_id");
-                    $result = mysqli_fetch_array($last_insert_id);
-                    $last_id = $result['id'];
-                    foreach($laboratory as $laboratorys)
-                    {
-                        mysqli_query($con, "INSERT INTO doctor_laboratory (`doctor_id`, `laboratory_id`) VALUES ('$last_id', '$laboratorys')");
-                    }
-
-                    
-                    echo "<script>alert('Doctor Add Successfully!')</script>";
+                    echo "<script>alert('Veterinarian Add Successfully!')</script>";
                     echo "<script>location.replace('doctor.php')</script>";
                 }
                 else
@@ -298,26 +265,8 @@
   <!-- Template JS File -->
   <script src="../assets/js/scripts.js"></script>
   <script src="../assets/js/custom.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#js-example-basic-single').select2();
-    });
-  </script>
-  <script>
-    $('#clinic').on('change', function() {
-            var clinic = $('#clinic').val();
-        
-                  $.ajax({
-                     url: 'doctor_lab.php?clinic=' + clinic,
-                     type: 'get',
-                     success: function(response){
-                      $('#laboratory').empty();
-                      $("#laboratory").append(response);    
-
-                     }
-                   });
-          } );
-  </script>
+  
+  <!-- Your Custom JS -->
+  <script src="../assets/js/admin-doctor.js"></script>
 </body>
 </html>

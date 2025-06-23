@@ -1,0 +1,86 @@
+/* Custom styles for Vaccination Records page */
+
+/* Custom style for disabled Add Record button */
+#addRecordBtn:disabled {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+  color: #fff !important;
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+#addRecordBtn:disabled:hover {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+}
+
+/* Pet filter dropdown styling */
+#pet_filter {
+  width: 180px;
+}
+
+/* Modal form styling improvements */
+.modal-body .form-group label {
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-body input[readonly] {
+  background-color: #f8f9fa !important;
+}
+
+/* Table styling improvements */
+#records-table thead th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+}
+
+#records-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Action buttons styling */
+.btn-action {
+  margin-right: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #pet_filter {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .card-header-action {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+  
+  .modal-dialog {
+    margin: 10px;
+  }
+}
+
+/* Loading spinner for DataTables */
+.dataTables_processing {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+}
+
+/* Form validation styling */
+.form-control.is-invalid {
+  border-color: #dc3545;
+}
+
+.form-control.is-valid {
+  border-color: #28a745;
+}
+
+/* Custom alert styling */
+.alert-custom {
+  border-radius: 6px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

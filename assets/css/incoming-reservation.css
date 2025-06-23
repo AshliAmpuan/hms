@@ -1,0 +1,52 @@
+/* Incoming Reservation Page Styles */
+
+.status-cancelled {
+  opacity: 0.7;
+  background-color: #f8f9fa;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #007bff;
+}
+
+/* Additional styling for better UX */
+.status-pending {
+  border-left: 3px solid #ffc107;
+}
+
+.status-cancelled {
+  border-left: 3px solid #dc3545;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.badge {
+  font-size: 0.75em;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.modal-header {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+  border-top: 1px solid #dee2e6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+  
+  .btn-sm {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.75rem;
+  }
+}

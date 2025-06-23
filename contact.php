@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Klinik - Clinic Website Template</title>
+    <title>Shepherd Animal Clinic</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -48,17 +48,17 @@
             <div class="col-lg-7 px-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-map-marker-alt text-primary me-2"></small>
-                    <small>123 Street, New York, USA</small>
+                    <small>1427 Pedro Gil St. Corner Peñafrancia, Paco, Philippines</small>
                 </div>
-                <div class="h-100 d-inline-flex align-items-center py-3">
-                    <small class="far fa-clock text-primary me-2"></small>
-                    <small>Mon - Fri : 09.00 AM - 09.00 PM</small>
+                <div class="h-100 d-inline-flex align-items-center py-2 me-4"> <!-- Reduced padding from py-3 to py-2 -->
+                    <small class="far fa-clock text-success me-2" style="font-size: 1.2rem;"></small> <!-- Increased icon size -->
+                    <small>Open Daily: 12:00 PM - 08:00 PM</small>
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">
-                <div class="h-100 d-inline-flex align-items-center py-3 me-4">
+                  <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-phone-alt text-primary me-2"></small>
-                    <small>+012 345 6789</small>
+                    <small>(02) 9066 662 </small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center">
                     <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -83,9 +83,11 @@
             <h1 class="display-3 text-white mb-3 animated slideInDown">Contact Us</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb text-uppercase mb-0">
+                    <!--
                     <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
                     <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
                     <li class="breadcrumb-item text-primary active" aria-current="page">Contact</li>
+                    -->
                 </ol>
             </nav>
         </div>
@@ -104,7 +106,7 @@
                         </div>
                         <div class="ms-4">
                             <p class="mb-2">Address</p>
-                            <h5 class="mb-0">123 Street, New York, USA</h5>
+                            <h5 class="mb-0">1427 Pedro Gil St. Corner Peñafrancia, Paco, Philippines</h5>
                         </div>
                     </div>
                 </div>
@@ -115,7 +117,7 @@
                         </div>
                         <div class="ms-4">
                             <p class="mb-2">Call Us Now</p>
-                            <h5 class="mb-0">+012 345 6789</h5>
+                            <h5 class="mb-0">(02) 9066 662</h5>
                         </div>
                     </div>
                 </div>
@@ -133,8 +135,7 @@
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                     <div class="bg-light rounded p-5">
                         <p class="d-inline-block border rounded-pill py-1 px-4">Contact Us</p>
-                        <h1 class="mb-4">Have Any Query? Please Contact Us!</h1>
-                        <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
+                        <h1 class="mb-4">Have Any Questions? Please Contact Us!</h1>
                         <form>
                             <div class="row g-3">
                                 <div class="col-md-6">
@@ -171,7 +172,7 @@
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <div class="h-100" style="min-height: 400px;">
                         <iframe class="rounded w-100 h-100"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
+                        src="https://www.google.com/maps/uv?pb=!1s0x3397c9796b3cc149%3A0x91c5850e3949ca51!3m1!7e115!4s%2Fmaps%2Fplace%2Fnsy%2Bmedical%2Band%2Bdiagnostic%2Bcenter%2Bphotos%2F%4014.5777058%2C120.9919999%2C3a%2C75y%2C355.8h%2C90t%2Fdata%3D*213m4*211e1*213m2*211sMdZOKIaysfkBVAs5Jsf2UQ*212e0*214m2*213m1*211s0x3397c9796b3cc149%3A0x91c5850e3949ca51%3Fsa%3DX%26ved%3D2ahUKEwi11vCM3r6MAxW2zzgGHQbMG1AQpx96BAgUEAA!5snsy%20medical%20and%20diagnostic%20center%20photos%20-%20Google%20Search!15sCgIgAQ&imagekey=!1e2!2sMdZOKIaysfkBVAs5Jsf2UQ&cr=le_a7&hl=en&ved=1t%3A206134&ictx=111"
                         frameborder="0" allowfullscreen="" aria-hidden="false"
                         tabindex="0"></iframe>
                     </div>

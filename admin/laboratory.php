@@ -43,12 +43,12 @@
             <h1></h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Entry</a></div>
-              <div class="breadcrumb-item">Laboratory Management</div>
+              <div class="breadcrumb-item">Service Type and Test</div>
             </div>
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">Laboratory Management</h2>
+            <h2 class="section-title">Service Type and Test</h2>
             <!-- <p class="section-lead">
               We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
             </p> -->
@@ -56,9 +56,9 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Laboratory Table</h4>
+                    <h4>Service Type and Test Table</h4>
                     <div class="card-header-action">
-                      <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Laboratory</button>
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Type/Test</button>
                     </div>
                   </div>
                   <div class="card-body">
@@ -71,9 +71,10 @@
                             </th>
                             <th>Clinic</th>
                             <th>Category</th>
-                            <th>Laboratory</th>
+                            <th>Service Type</th>
                             <th>Details</th>
                             <th>Price</th>
+                            <th>Species</th>
                             <th>Status</th>
                           </tr>
                         </thead>
@@ -94,6 +95,7 @@
                             <td><?php echo $row['laboratory_name']; ?></td>
                             <td><?php echo $row['details']; ?></td>
                             <td><?php echo number_format($row['price'], 2); ?></td>
+                            <td><?php echo $row['pet_species'] ? $row['pet_species'] : 'N/A'; ?></td>
                             <td><?php echo $row['status']; ?></td>
                           </tr>
                           <?php } ?>
@@ -111,7 +113,7 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Add Laboratory</h5>
+                <h5 class="modal-title">Add Service Type</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -142,7 +144,7 @@
                       </div>
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label>Category</label>
+                          <label>Service</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
@@ -150,14 +152,14 @@
                               </div>
                             </div>
                             <select name="category" class="form-control" id="category">
-                              
+                            <option value="#" disabled selected>Choose...</option>
                             </select>
                           </div>
                         </div>
                       </div>
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <label>Laboratory</label>
+                          <label>Service Type/Test</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
@@ -194,6 +196,32 @@
                           </div>
                         </div>
                       </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>Pet Species</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-paw"></i>
+                              </div>
+                            </div>
+                            <select name="species" class="form-control" id="species">
+                                <option value="" disabled selected>Choose Species...</option>
+                                <option value="Dog">Dog</option>
+                                <option value="Cat">Cat</option>
+                                <option value="Both">Both (Dog & Cat)</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>&nbsp;</label>
+                          <div class="text-muted small">
+                            Select the pet species this service is for
+                          </div>
+                        </div>
+                      </div>
                       <div class="col-lg-12">
                         <div class="form-group">
                           <label>Details</label>
@@ -226,8 +254,9 @@
           $category = $_POST['category'];
           $details = $_POST['details'];
           $capacity = $_POST['capacity'];
+          $species = $_POST['species'];
 
-          $laboratoryinsert = mysqli_query($con, "INSERT INTO laboratory (`clinic_id`, `category_id`, `laboratory_name`, `details`, `price`, `capacity_per_day`) VALUES ('$clinic', '$category', '$laboratory', '$details', '$price', '$capacity')");
+          $laboratoryinsert = mysqli_query($con, "INSERT INTO laboratory (`clinic_id`, `category_id`, `laboratory_name`, `details`, `price`, `capacity_per_day`, `pet_species`) VALUES ('$clinic', '$category', '$laboratory', '$details', '$price', '$capacity', '$species')");
                 if($laboratoryinsert)
                 {
                     echo "<script>alert('Laboratory Add Successfully!')</script>";
@@ -262,20 +291,7 @@
   <!-- Template JS File -->
   <script src="../assets/js/scripts.js"></script>
   <script src="../assets/js/custom.js"></script>
-  <script>
-    $('#clinic').on('change', function() {
-            var clinic = $('#clinic').val();
-        
-                  $.ajax({
-                     url: 'categorydata.php?clinic=' + clinic,
-                     type: 'get',
-                     success: function(response){
-                      $('#category').empty();
-                      $("#category").append(response);    
+  <script src="../assets/js/admin-laboratory.js"></script>
 
-                     }
-                   });
-          } );
-  </script>
 </body>
 </html>

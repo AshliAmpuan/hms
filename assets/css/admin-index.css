@@ -1,0 +1,164 @@
+/* Dashboard Custom Styles */
+
+/* Card Statistics Hover Effect */
+.card-statistic-1 {
+  transition: all 0.3s ease;
+}
+
+.card-statistic-1:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Card Icon Styling */
+.card-icon {
+  transition: all 0.3s ease;
+}
+
+.card-statistic-1:hover .card-icon {
+  transform: scale(1.1);
+}
+
+/* Chart Container Styling */
+#dataChart {
+  max-height: 400px;
+}
+
+/* Chart Title Styling */
+#chartTitle {
+  font-weight: 600;
+  color: #34395e;
+  margin-bottom: 0;
+}
+
+/* Chart Selector Dropdown */
+#chartTypeSelector {
+  min-width: 200px;
+  border-radius: 8px;
+  border: 1px solid #e4e6fc;
+  background-color: #fff;
+  color: #34395e;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+}
+
+#chartTypeSelector:focus {
+  border-color: #6777ef;
+  box-shadow: 0 0 0 0.2rem rgba(103, 119, 239, 0.25);
+}
+
+/* Card Header Flex Layout */
+.card-header.d-flex {
+  align-items: center;
+  padding: 1.5rem 1.25rem 1rem;
+}
+
+/* Responsive Chart Container */
+.card-body canvas {
+  width: 100% !important;
+  height: 300px !important;
+}
+
+/* Animation for loading */
+.card-statistic-1 .card-body {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Number formatting in cards */
+.card-statistic-1 .card-body {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #34395e;
+}
+
+/* Currency symbol styling */
+.card-statistic-1 .card-body:before {
+  content: '';
+}
+
+/* Chart responsive behavior */
+@media (max-width: 768px) {
+  .card-header.d-flex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  #chartTypeSelector {
+    min-width: 100%;
+  }
+  
+  .card-statistic-1 .card-body {
+    font-size: 1.25rem;
+  }
+}
+
+/* Loading state for chart */
+.chart-loading {
+  position: relative;
+}
+
+.chart-loading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #6777ef;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 10;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Enhanced card styling */
+.card {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.card-header {
+  background-color: #fff;
+  border-bottom: 1px solid #f4f4f4;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Status indicators */
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-indicator.green {
+  background-color: #47c363;
+}
+
+.status-indicator.red {
+  background-color: #fc544b;
+}
+
+.status-indicator.orange {
+  background-color: #ffa426;
+}

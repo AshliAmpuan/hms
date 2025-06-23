@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Register &mdash; Stisla</title>
+  <title>Register &mdash;</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css">
@@ -33,7 +33,7 @@
         <div class="row">
           <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
             <div class="login-brand">
-            <h1 class="m-0 text-primary">Montesa Medical Clinic</h1>
+            <h1 class="m-0 text-primary"> Shepherd Animal Clinic</h1>
             </div>
 
             <div class="card card-primary">
@@ -70,7 +70,8 @@
                   <div class="row">
                     <div class="form-group col-6">
                       <label for="password" class="d-block">Password</label>
-                      <input id="password" type="password" class="form-control pwstrength" required data-indicator="pwindicator" name="password">
+                      <input id="password" type="password" class="form-control pwstrength" required data-indicator="pwindicator" name="password"minlength="8"pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}">
+                      <small class="form-text text-muted">Password must be at least 8 characters long, contain uppercase and lowercase letters, a number, and a special character.</small>
                       <div id="pwindicator" class="pwindicator">
                         <div class="bar"></div>
                         <div class="label"></div>
@@ -91,7 +92,7 @@
                     <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block">
                       Register
                     </button>
-                    <a href="login.php" class="btn btn-secondary btn-lg btn-block">Do you have login? Click Here!</a>
+                    <a href="login.php" class="btn btn-secondary btn-lg btn-block">Already have an Account?</a>
                   </div>
                 </form>
               </div>

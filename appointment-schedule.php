@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Klinik - Clinic Website Template</title>
+    <title>Shepherd Animal Clinic</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -48,11 +48,11 @@
             <div class="col-lg-7 px-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-map-marker-alt text-primary me-2"></small>
-                    <small>123 Street, New York, USA</small>
+                    <small>1427 Pedro Gil St. Corner Peñafrancia, Paco, Philippines</small>
                 </div>
-                <div class="h-100 d-inline-flex align-items-center py-3">
-                    <small class="far fa-clock text-primary me-2"></small>
-                    <small>Mon - Fri : 09.00 AM - 09.00 PM</small>
+                <div class="h-100 d-inline-flex align-items-center py-2 me-4"> <!-- Reduced padding from py-3 to py-2 -->
+                    <small class="far fa-clock text-success me-2" style="font-size: 1.2rem;"></small> <!-- Increased icon size -->
+                    <small>Open Daily: 12:00 PM - 08:00 PM</small>
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">

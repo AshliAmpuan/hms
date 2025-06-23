@@ -43,22 +43,19 @@
             <h1></h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Entry</a></div>
-              <div class="breadcrumb-item">Category Management</div>
+              <div class="breadcrumb-item">Service Category</div>
             </div>
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">Category Management</h2>
-            <!-- <p class="section-lead">
-              We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
-            </p> -->
+            <h2>Category Management</h2>
             <div class="row">
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
                     <h4>Category Table</h4>
                     <div class="card-header-action">
-                      <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Category</button>
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Service</button>
                     </div>
                   </div>
                   <div class="card-body">
@@ -66,17 +63,16 @@
                     <table class="table table-striped" id="table-1">
                         <thead>
                           <tr>
-                          <th>
-                              #
-                            </th>
+                            <th>#</th>
                             <th>Clinic</th>
                             <th>Category</th>
+                            <th>Description</th>
                             <th>Status</th>
                           </tr>
                         </thead>
                         <tbody>
                           <?php
-                            $query = mysqli_query($con, "SELECT category.category, clinic_name,
+                            $query = mysqli_query($con, "SELECT category.category, category.description, clinic_name,
                             (SELECT CASE WHEN category.active = 1 THEN 'active' ELSE 'Not Active' END) as status
                              FROM category INNER JOIN clinic ON clinic.id=category.clinic_id");
                              $count = 0;
@@ -87,6 +83,7 @@
                             <td><?php echo $count; ?></td>
                             <td><?php echo $row['clinic_name']; ?></td>
                             <td><?php echo $row['category']; ?></td>
+                            <td><?php echo !empty($row['description']) ? substr($row['description'], 0, 50) . (strlen($row['description']) > 50 ? '...' : '') : 'No description'; ?></td>
                             <td><?php echo $row['status']; ?></td>
                           </tr>
                           <?php } ?>
@@ -100,6 +97,8 @@
           </div>
         </section>
       </div>
+      
+      <!-- Add Category Modal -->
       <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -118,12 +117,11 @@
                           <div class="input-group">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
-                                <i class="fas fa-user"></i>
+                                <i class="fas fa-hospital"></i>
                               </div>
                             </div>
-                            <!-- <input type="text" class="form-control" placeholder="Category" name="category"> -->
-                             <select name="clinic" class="form-control" id="">
-                                <option value="#" selected disabled>Choose..</option>
+                             <select name="clinic" class="form-control" required>
+                                <option value="" selected disabled>Choose..</option>
                                 <?php
                                     $query = mysqli_query($con, "SELECT * FROM clinic");
                                     while($row = mysqli_fetch_array($query)) {
@@ -140,10 +138,23 @@
                           <div class="input-group">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
-                                <i class="fas fa-user"></i>
+                                <i class="fas fa-tags"></i>
                               </div>
                             </div>
-                            <input type="text" class="form-control" placeholder="Category" name="category">
+                            <input type="text" class="form-control" placeholder="Service Category" name="category" required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <label>Description</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-file-alt"></i>
+                              </div>
+                            </div>
+                            <textarea class="form-control" placeholder="Enter category description (optional)" name="description" rows="3"></textarea>
                           </div>
                         </div>
                       </div>
@@ -161,17 +172,18 @@
      <?php include('../include/footer.php'); ?>
     </div>
   </div>
+  
   <?php
-
       if(isset($_POST['submit']))
       {
-          $category = $_POST['category'];
-          $clinic = $_POST['clinic'];
+          $category = mysqli_real_escape_string($con, $_POST['category']);
+          $clinic = mysqli_real_escape_string($con, $_POST['clinic']);
+          $description = mysqli_real_escape_string($con, $_POST['description']);
 
-          $categoryinsert = mysqli_query($con, "INSERT INTO category (`clinic_id`, `category`) VALUES ('$clinic', '$category')");
+          $categoryinsert = mysqli_query($con, "INSERT INTO category (`clinic_id`, `category`, `description`) VALUES ('$clinic', '$category', '$description')");
                 if($categoryinsert)
                 {
-                    echo "<script>alert('Category Add Successfully!')</script>";
+                    echo "<script>alert('Service Added Successfully!')</script>";
                     echo "<script>location.replace('category.php')</script>";
                 }
                 else
@@ -179,7 +191,6 @@
                   echo "<script>alert('Something Went Wrong!')</script>";
                 }
       }
-  
   ?>
 
   <!-- General JS Scripts -->

@@ -1,0 +1,316 @@
+/* Enhanced Card Styling */
+.enhanced-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  background: #fff;
+}
+
+.enhanced-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.enhanced-card .card-header {
+  border: none;
+  border-radius: 0;
+  padding: 1.5rem 1.5rem 1rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  position: relative;
+}
+
+.enhanced-card .card-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, #007bff, #28a745, #ffc107, #17a2b8);
+  border-radius: 1px;
+}
+
+.enhanced-card .card-header h5 {
+  margin: 0;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.enhanced-card .card-body {
+  padding: 1.5rem;
+}
+
+/* Doctor Leave Table Styling */
+.doctor-leave-table .table-responsive {
+  border-radius: 0 0 15px 15px;
+  overflow: hidden;
+}
+
+.doctor-leave-table .table {
+  margin-bottom: 0;
+}
+
+.doctor-leave-table .table thead th {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: none;
+  color: #495057;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 1rem 1.25rem;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.doctor-leave-table .table tbody td {
+  padding: 1rem 1.25rem;
+  border: none;
+  border-bottom: 1px solid #f1f3f4;
+  vertical-align: middle;
+}
+
+.doctor-leave-table .table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.doctor-leave-table .table-hover tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+  transition: background-color 0.2s ease;
+}
+
+/* Avatar styling */
+.avatar {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-initial {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* Status badges */
+.badge-pill {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Row highlighting based on urgency */
+.table-danger {
+  background-color: rgba(220, 53, 69, 0.1) !important;
+}
+
+.table-warning {
+  background-color: rgba(255, 193, 7, 0.1) !important;
+}
+
+/* Laboratory List Styling */
+.lab-list {
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.lab-list .list-group-item {
+  border: none;
+  border-bottom: 1px solid #f1f3f4;
+  padding: 1rem 1.25rem;
+  transition: all 0.2s ease;
+  background: #fff;
+}
+
+.lab-list .list-group-item:last-child {
+  border-bottom: none;
+}
+
+.lab-list .list-group-item div {
+  color: #495057;
+  font-weight: 500;
+}
+
+.lab-price {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Button Styling */
+.btn-reservation {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  border: none;
+  border-radius: 25px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-reservation:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+  background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+}
+
+/* Alert Styling */
+.alert-enhanced {
+  border: none;
+  border-radius: 12px;
+  padding: 1.5rem;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.alert-info.alert-enhanced {
+  background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+  color: #0c5460;
+  border-left: 4px solid #17a2b8;
+}
+
+/* Simple Modal Styling */
+.simple-modal .modal-content {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.simple-modal .modal-header {
+  background: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  border-radius: 12px 12px 0 0;
+  padding: 1.5rem;
+}
+
+.simple-modal .modal-title {
+  color: #495057;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.simple-modal .modal-body {
+  padding: 2rem;
+  text-align: center;
+}
+
+.simple-modal .modal-footer {
+  border-top: 1px solid #dee2e6;
+  padding: 1rem 1.5rem;
+  background: #f8f9fa;
+  border-radius: 0 0 12px 12px;
+}
+
+.pet-icon-simple {
+  font-size: 3rem;
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+/* Section Header */
+.section-header h1 {
+  color: #2c3e50;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.section-header h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #007bff, #28a745);
+  border-radius: 2px;
+}
+
+/* Separator Styling */
+.separator-container {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.separator-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #dee2e6, transparent);
+  flex: 1;
+}
+
+.separator-content {
+  background: #fff;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.separator-title {
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #007bff 0%, #28a745 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.separator-subtitle {
+  color: #6c757d;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.separator-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #dee2e6 20%, #dee2e6 80%, transparent);
+  transform: translateY(-50%);
+}
+
+/* Shepherd Logo Styling for Pet Modal */
+.shepherd-logo {
+  max-width: 150px;
+  max-height: 150px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
+}
+
+.shepherd-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Update pet-icon-simple container to work better with image */
+.pet-icon-simple {
+  font-size: 3rem;
+  color: #6c757d;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

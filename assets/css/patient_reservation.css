@@ -1,0 +1,198 @@
+/* Main container */
+.reservation-container {
+  background: #f8f9fa;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  margin: 20px 0;
+}
+
+/* Calendar styling */
+#calendar {
+  max-width: 100%;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Calendar header */
+.fc-toolbar {
+  margin-bottom: 25px;
+  padding: 15px 20px;
+  background: #28a745;
+  border-radius: 5px;
+}
+
+.fc-toolbar h2 {
+  font-size: 1.8rem;
+  color: white;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Navigation buttons */
+.fc-button {
+  background:rgb(0, 99, 204);
+  border: none;
+  color: white;
+  padding: 10px 18px;
+  margin: 0 3px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.fc-button:hover {
+  background:rgb(0, 70, 145);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,123,255,0.3);
+}
+
+.fc-button:focus {
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+}
+
+/* Previous/Next buttons */
+.fc-prev-button, .fc-next-button {
+  background: white !important;
+  color: #6c757d !important;
+  font-weight: bold;
+}
+
+.fc-prev-button:hover, .fc-next-button:hover {
+  background: #f8f9fa !important;
+  color: #495057 !important;
+}
+
+/* Hide the 6th week row to show only 35 dates (5 weeks × 7 days) */
+.fc-day-grid .fc-week:nth-child(6) {
+  display: none !important;
+}
+
+/* Fix calendar height - make the 5 visible weeks fill the space */
+.fc-day-grid-container {
+  height: auto !important;
+  min-height: 300px;
+}
+
+.fc-day-grid {
+  height: 100% !important;
+}
+
+.fc-day-grid table {
+  height: 100% !important;
+  table-layout: fixed;
+}
+
+.fc-day-grid .fc-week {
+  height: 20% !important; /* Each of the 5 weeks takes 20% of the height */
+}
+
+.fc-day-grid .fc-week td {
+  height: 60px !important;
+  vertical-align: top;
+}
+
+/* Today cell - FIXED */
+.fc-today {
+  background:rgb(0, 196, 49) !important;
+  border: 2px solid rgb(0, 116, 27) !important;
+  margin: 2px !important;
+  border-radius: 4px !important;
+}
+
+/* Day cells */
+.fc-day {
+  border: 2px solid rgb(133, 133, 133) !important;
+  transition: all 0.2s ease;
+  border-collapse: separate !important;
+  margin: 2px !important;
+  border-radius: 4px !important;
+}
+
+/* Remove default table borders */
+.fc-day-grid table {
+  border-collapse: separate !important;
+  border-spacing: 5px !important;
+}
+
+.fc-day-grid td {
+  border: none !important;
+}
+
+/* Ensure clean individual boxes */
+.fc-day-top {
+  border: none !important;
+}
+
+.fc-day-content {
+  border: none !important;
+}
+
+/* Day numbers */
+.fc-day-number {
+  font-weight: 600;
+  color: #495057;
+  font-size: 20px;
+  padding: 8px;
+}
+
+/* Today day number - make it stand out more */
+.fc-today .fc-day-number {
+  color:rgb(255, 255, 255);
+  font-weight: 700;
+  background: rgba(40, 167, 69, 0.1);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px;
+}
+
+/* Events */
+.fc-event {
+  background:rgba(102, 211, 75, 0.93);
+  border: none;
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin: 1px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.fc-event:hover {
+  background:rgb(84, 245, 98);
+}
+
+/* Section header */
+.section-header {
+  margin-bottom: 30px;
+}
+
+.section-header h1 {
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .reservation-container {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  #calendar {
+    padding: 15px;
+  }
+  
+  .fc-toolbar h2 {
+    font-size: 1.4rem;
+  }
+}

@@ -6,11 +6,11 @@
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 									</div>
 									<div class="modal-body">
-                                        <h4>Are you sure you want to approve this reservation?</h4>
+                                        <h4>Are you sure you want to approve this appointment?</h4>
                                     </div>
 									<div class="modal-footer">
 										<button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
-                                        <a href="accepted.php?reference=<?php echo $row['reference']; ?>" class="btn btn-primary">Save Reservation</a>
+                                        <a href="accepted.php?reference=<?php echo $row['reference']; ?>" class="btn btn-primary">Save Appointment</a>
 									</div>
 								</div>
 							</div>

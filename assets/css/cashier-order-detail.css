@@ -1,0 +1,30 @@
+.order-items {
+            padding: 10px;
+        }
+        
+        .item-row {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .item-info strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .item-info small {
+            color: #666;
+        }
+        
+        .item-details {
+            margin-top: 8px;
+            color: #555;
+        }
+        
+        .total-row {
+            padding: 15px;
+            background: #f8f9fa;
+            text-align: right;
+            font-size: 18px;
+            color: #28a745;
+        }

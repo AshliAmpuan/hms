@@ -18,21 +18,20 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
-<!-- Start GA -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/cashier-appointment.css">
 
-  gtag('config', 'UA-94034622-3');
-</script>
-<style>
-  .modal-backdrop {
-  z-index: 0;
-}
-</style>
-<!-- /END GA --></head>
+  <!-- Start GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-94034622-3');
+  </script>
+  <!-- /END GA -->
+</head>
 
 <body>
   <div id="app">
@@ -48,20 +47,17 @@
             <h1></h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Entry</a></div>
-              <div class="breadcrumb-item">Reservation</div>
+              <div class="breadcrumb-item">Appointment</div>
             </div>
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">Reservation</h2>
-            <!-- <p class="section-lead">
-              We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
-            </p> -->
+            <h2 class="section-title">Approved Appointments - Cash Payments Only</h2>
             <div class="row">
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Reservation Table</h4>
+                    <h4>All Approved Reservations (Cash Only)</h4>
                     <div class="card-header-action">
                       <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Laboratory</button> -->
                     </div>
@@ -71,27 +67,56 @@
                       <table class="table table-striped" id="table-1">
                         <thead>
                           <tr>
-                          <th>
-                              #
-                            </th>
+                            <th>#</th>
                             <th>Patient</th>
                             <th>Contact Number</th>
-                            <th>Laboratory</th>
+                            <th>Service Type/Test</th>
                             <th>Date</th>
+                            <th>Time</th>
                             <th>Price</th>
-                            <th>Status</th>
+                            <th>Payment</th>
                           </tr>
                         </thead>
                         <tbody>
                           <?php
-                          // $id = $_SESSION['patient_id'];
-                            $query = mysqli_query($con, "SELECT reservation.id, laboratory.laboratory_name, reservation.tdate, laboratory.price, 
-                            (SELECT CASE WHEN reservation.status = 0 THEN 'PENDING' WHEN reservation.status = 1 THEN 'APPROVED' ELSE 'CANCELLED' END) 
-                            AS reservation_status, reservation.status, patient.firstname, patient.lastname, patient.contact_number, reservation.doctor_id FROM reservation INNER JOIN laboratory ON laboratory.id=reservation.laboratory_id 
-                            INNER JOIN patient ON patient.id=reservation.patient_id WHERE reservation.add_to_checkout = 1 and reservation.mop = 1");
-                             $count = 0;
-                            while($row = mysqli_fetch_array($query)){
-                              $count += 1;
+                          // Modified query to show ONLY approved reservations with CASH payment method (mop = 1)
+                          $query = mysqli_query($con, "SELECT 
+                            reservation.id, 
+                            laboratory.laboratory_name, 
+                            reservation.tdate, 
+                            reservation.time, 
+                            laboratory.price, 
+                            reservation.add_to_checkout,
+                            reservation.mop,
+                            patient.firstname, 
+                            patient.lastname, 
+                            patient.contact_number, 
+                            reservation.doctor_id,
+                            reservation.pet_id,
+                            pet.pet_name,
+                            transaction.id as transaction_id,
+                            transaction.status as payment_status,
+                            CASE 
+                              WHEN transaction.status IS NULL AND reservation.add_to_checkout = 0 THEN 'PENDING PAYMENT'
+                              WHEN transaction.status IS NULL AND reservation.add_to_checkout = 1 THEN 'PENDING PAYMENT'
+                              WHEN transaction.status = 0 THEN 'PENDING PAYMENT' 
+                              WHEN transaction.status = 1 THEN 'PAID' 
+                              WHEN transaction.status = 2 THEN 'CANCELLED'
+                              ELSE 'PENDING PAYMENT' 
+                            END AS transaction_status
+                            FROM reservation 
+                            INNER JOIN laboratory ON laboratory.id = reservation.laboratory_id 
+                            INNER JOIN patient ON patient.id = reservation.patient_id 
+                            LEFT JOIN pet ON pet.id = reservation.pet_id
+                            LEFT JOIN transaction ON transaction.reservation_id = reservation.id 
+                            WHERE reservation.status = 1
+                            AND reservation.mop = 1
+                            AND (transaction.mop IS NULL OR transaction.mop = '1')
+                            ORDER BY reservation.id DESC");
+                            
+                          $count = 0;
+                          while($row = mysqli_fetch_array($query)){
+                            $count += 1;
                           ?>
                           <tr>
                             <td><?php echo $count; ?></td>
@@ -99,22 +124,80 @@
                             <td><?php echo $row['contact_number']; ?></td>
                             <td><?php echo $row['laboratory_name']; ?></td>
                             <td><?php echo $row['tdate']; ?></td>
-                            <td><?php echo number_format($row['price'], 2); ?></td>
+                            <td><?php echo $row['time'] ? date('g:i A', strtotime($row['time'])) : 'Not Set'; ?></td>
+                            <td>₱<?php echo number_format($row['price'], 2); ?></td>
                             <td>
-                              <?php if($row['status'] == 0) { ?>
-                                <buttton class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModalsuccess<?php echo $row['id']; ?>"><i class="fa fa-check"></i> Approve</buttton> 
-                                <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModaldanger<?php echo $row['id']; ?>"><i class="fa fa-ban"></i> Cancel</a>
-                                <?php } else {  ?>
-                                  <div class="badge badge-<?php if($row['status'] == 0) { echo 'warning'; } else if($row['status'] == 1) { echo 'success'; } else { echo 'danger'; } ?>">
-                                    <?php echo $row['reservation_status']; ?>
-                                </div>
-                                  <?php } ?>
+                              <?php 
+                              // Check if reservation has no transaction record or unpaid transaction
+                              if($row['transaction_id'] == null || $row['payment_status'] == 0) { ?>
+                                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#paymentModal<?php echo $row['id']; ?>">
+                                  Pay Transaction
+                                </button>
+                              <?php } elseif($row['payment_status'] == 1) { ?>
+                                <div class="badge badge-success">PAID</div>
+                              <?php } elseif($row['payment_status'] == 2) { ?>
+                                <div class="badge badge-danger">CANCELLED</div>
+                              <?php } ?>
                             </td>
                           </tr>
-                          <?php
-                        include 'modal/approve_reservation.php';
-                        include 'modal/decline_reservation.php';
-                        } ?>
+                          
+                          <!-- Payment Modal - Universal for all reservations -->
+                          <div class="modal fade" id="paymentModal<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Process Payment</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <form method="post">
+                                  <div class="modal-body">
+                                    <!-- Laboratory Name Display -->
+                                    <div class="laboratory-name">
+                                      <strong><?php echo $row['laboratory_name']; ?></strong>
+                                    </div>
+                                    <div class="patient-name">
+                                      <p>Patient: <strong><?php echo $row['firstname'].' '.$row['lastname']; ?></strong></p>
+                                    </div>
+                                    
+                                    <!-- Pet Information Display -->
+                                    <?php if(!empty($row['pet_name'])) { ?>
+                                    <div class="pet-name">
+                                      <p>Pet: <strong><?php echo $row['pet_name']; ?></strong></p>
+                                    </div>
+                                    <?php } ?>
+                                    
+                                    <div class="form-group">
+                                      <label>Amount to Pay</label>
+                                      <input type="number" step="0.01" class="form-control" name="atp" id="atp<?php echo $row['id']; ?>" value="<?php echo number_format($row['price'], 2, '.', ''); ?>" readonly>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                      <label>Amount Received</label>
+                                      <input type="number" step="0.01" class="form-control" name="amount" id="amount<?php echo $row['id']; ?>" onkeyup="calculateChange(<?php echo $row['id']; ?>)" required>
+                                    </div>
+                                    
+                                    <!-- Change Display -->
+                                    <div class="change-display" id="changeDisplay<?php echo $row['id']; ?>" style="display: none;">
+                                      <strong>Change: ₱<span id="changeAmount<?php echo $row['id']; ?>">0.00</span></strong>
+                                    </div>
+                                    
+                                    <input type="hidden" name="reservation_id" value="<?php echo $row['id']; ?>">
+                                    <?php if($row['transaction_id'] != null) { ?>
+                                      <input type="hidden" name="transaction_id" value="<?php echo $row['transaction_id']; ?>">
+                                    <?php } ?>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" name="process_payment" class="btn btn-success">Process Payment</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <?php } ?>
                         </tbody>
                       </table>
                     </div>
@@ -129,6 +212,7 @@
      <?php include('../include/footer.php'); ?>
     </div>
   </div>
+  
   <?php
 
       if(isset($_POST['submit']))
@@ -153,6 +237,40 @@
   ?>
   <?php
 
+if(isset($_POST['process_payment']))
+{
+    date_default_timezone_set("Asia/Manila");
+    $tdate = date("Y-m-d");
+    
+    $reservation_id = $_POST['reservation_id'];
+    $atp = $_POST['atp'];
+    $amount = $_POST['amount'];
+    $cashier_id = $_SESSION['cashier_id'];
+
+    if($amount >= $atp)
+    {
+        // Check if transaction already exists
+        if(isset($_POST['transaction_id']) && !empty($_POST['transaction_id'])) {
+            // Update existing transaction to paid status
+            $transaction_id = $_POST['transaction_id'];
+            mysqli_query($con, "UPDATE transaction SET `status` = 1, `mop` = '1' WHERE id = $transaction_id");
+        } else {
+            // Create new transaction record with paid status and cash payment method
+            mysqli_query($con, "INSERT INTO transaction (`reservation_id`, `price`, `tdate`, `cashier_id`, `status`, `mop`) VALUES ('$reservation_id', '$atp', '$tdate', '$cashier_id', 1, '1')");
+        }
+        
+        // Update reservation with paid_by instead of approve_by
+        mysqli_query($con, "UPDATE reservation SET `status` = 1, `paid_by` = $cashier_id WHERE id = $reservation_id");
+        
+        echo "<script>alert('Payment processed successfully!');</script>";
+        echo "<script>window.location.replace('" . $_SERVER['PHP_SELF'] . "');</script>";
+    }
+    else
+    {
+        echo "<script>alert('Insufficient Amount!');</script>";
+    }
+}
+
 if(isset($_POST['approve']))
 {
     date_default_timezone_set("Asia/Manila");
@@ -162,24 +280,29 @@ if(isset($_POST['approve']))
     $cashier_id = $_SESSION['cashier_id'];
     $atp = $_POST['atp'];
     $amount = $_POST['amount'];
-    $doctor_id = $_POST['doctor_id'];
 
     if($amount >= $atp)
     {
-        mysqli_query($con, "UPDATE reservation SET `status` = 1, `approve_by` = $cashier_id WHERE id = $id");
+        // Update reservation with paid_by instead of approve_by
+        mysqli_query($con, "UPDATE reservation SET `status` = 1, `paid_by` = $cashier_id WHERE id = $id");
 
-        mysqli_query($con, "INSERT INTO transaction (`reservation_id`, `price`, `tdate`, `cashier_id`) VALUES ('$id', '$atp', '$tdate', '$cashier_id')");
-
-        $dFee = $atp * 0.5;
-        mysqli_query($con, "INSERT INTO doctor_fee (`doctor_id`, `reservation_id`, `amount`, `tdate`) VALUES ('$doctor_id', '$id', '$dFee', '$tdate')");
+        mysqli_query($con, "INSERT INTO transaction (`reservation_id`, `price`, `tdate`, `cashier_id`, `status`, `mop`) VALUES ('$id', '$atp', '$tdate', '$cashier_id', 1, '1')");
 
         echo "<script>window.location.replace('rptreservation.php')</script>";
     }
     else
     {
-        echo "<script>alert('Insuffient Amount!')</script>";
+        echo "<script>alert('Insufficient Amount!')</script>";
     }
 
+}
+
+if(isset($_POST['cancel']))
+{
+    $id = $_POST['id'];
+    mysqli_query($con, "UPDATE transaction SET `status` = 2 WHERE reservation_id = $id");
+    mysqli_query($con, "UPDATE reservation SET `status` = 2 WHERE id = $id");
+    echo "<script>window.location.reload()</script>";
 }
 
 ?>
@@ -205,5 +328,8 @@ if(isset($_POST['approve']))
   <!-- Template JS File -->
   <script src="../assets/js/scripts.js"></script>
   <script src="../assets/js/custom.js"></script>
+  
+  <!-- Custom JS -->
+  <script src="../assets/js/cashier-rptreservation.js"></script>
 </body>
 </html>
